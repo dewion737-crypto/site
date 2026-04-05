@@ -558,7 +558,116 @@ html{scroll-behavior:smooth}
   </div>
 </section> -->
 
-<!-- ============ CTA BANNER ============ -->
+
+<!-- ============ CTA BANNER — замена формы email ============ -->
+<!-- Вставить вместо блока с id/class CTA BANNER в index.html -->
+<!-- Подключить qrcode.js перед закрывающим </body>:
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+-->
+
+<section class="py-16 relative overflow-hidden" style="background:linear-gradient(to right,#f9fafb,#f3f4f6)">
+  <div class="container mx-auto px-4">
+    <div style="max-width:56rem;margin:0 auto;text-align:center;background:rgba(255,255,255,.8);backdrop-filter:blur(12px);border-radius:1.5rem;padding:3rem;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);border:1px solid rgba(255,255,255,.5)">
+
+      <h2 class="text-4xl font-medium mb-4">
+        Начните говорить по-английски <span style="color:#0EB623">уже сегодня</span>
+      </h2>
+      <p class="text-gray-600 mb-10">
+        Запишитесь на бесплатный пробный урок и убедитесь в эффективности методики
+      </p>
+
+      <!-- ДЕСКТОП: QR код -->
+      <div id="cta-desktop" style="display:none;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap">
+        <div style="flex-shrink:0">
+          <div id="qr-code" style="width:148px;height:148px;border-radius:16px;overflow:hidden;border:1px solid rgba(14,182,35,.25);padding:8px;background:#fff;box-shadow:0 0 20px rgba(14,182,35,.12)"></div>
+        </div>
+        <div style="text-align:left;max-width:280px">
+          <div style="font-size:1.15rem;font-weight:500;color:#111827;margin-bottom:8px">Запишитесь через Telegram</div>
+          <p style="color:#4B5563;font-size:.95rem;line-height:1.6;margin-bottom:1.25rem">
+            Наведите камеру телефона на QR-код — и напишите нам напрямую. Отвечаем быстро.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px;font-size:.875rem;color:#4B5563">
+              <span style="width:22px;height:22px;border-radius:50%;background:rgba(14,182,35,.12);color:#0EB623;font-weight:600;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</span>
+              Откройте камеру телефона
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.875rem;color:#4B5563">
+              <span style="width:22px;height:22px;border-radius:50%;background:rgba(14,182,35,.12);color:#0EB623;font-weight:600;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</span>
+              Наведите на QR-код
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.875rem;color:#4B5563">
+              <span style="width:22px;height:22px;border-radius:50%;background:rgba(14,182,35,.12);color:#0EB623;font-weight:600;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</span>
+              Напишите нам — ответим сразу
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- МОБАЙЛ: кнопки мессенджеров -->
+      <div id="cta-mobile" style="display:none;flex-direction:column;align-items:center;gap:12px;max-width:360px;margin:0 auto">
+        <a href="https://t.me/English_alina752_bot"
+          style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:14px 24px;border-radius:100px;background:rgba(14,182,35,.08);border:1px solid rgba(14,182,35,.3);color:#0c7a1e;font-weight:500;font-size:1rem;text-decoration:none;transition:all .2s"
+          onmouseenter="this.style.background='rgba(14,182,35,.15)'"
+          onmouseleave="this.style.background='rgba(14,182,35,.08)'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="12" fill="#29B6F6"/>
+            <path d="M5 10.5l12-4.7-1.7 10.2-3.4-3-1.7 1.7V12l5.1-4.7-6.4 3.8L5 10.5z" fill="white"/>
+          </svg>
+          Написать в Telegram
+        </a>
+        <a href="https://wa.me/79990000000?text=Здравствуйте!%20Хочу%20записаться%20на%20пробный%20урок"
+          style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:14px 24px;border-radius:100px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.3);color:#1a7a3c;font-weight:500;font-size:1rem;text-decoration:none;transition:all .2s"
+          onmouseenter="this.style.background='rgba(37,211,102,.15)'"
+          onmouseleave="this.style.background='rgba(37,211,102,.08)'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="12" fill="#25D366"/>
+            <path d="M17 7a7 7 0 0 0-9.9 9.9L6 18l1.2-1.1A7 7 0 0 0 17 7zm-5 10a5.5 5.5 0 0 1-2.9-.8l-.2-.1-2.9.8.7-2.9-.2-.2A5.5 5.5 0 1 1 12 17zm3-4c-.1-.1-1-.4-1.1-.5-.2-.1-.3-.1-.4.1l-.5.6c-.1.1-.2.1-.3 0-.2-.1-.7-.3-1.3-.9a5 5 0 0 1-.9-1.2c-.1-.2 0-.3.1-.4l.3-.3.1-.3v-.2l-.5-1.3c-.1-.3-.3-.3-.4-.3h-.3c-.1 0-.3.1-.4.3-.2.2-.6.6-.6 1.5s.6 1.7.7 1.8c.1.1 1.2 1.9 2.9 2.6.4.2.8.3 1 .3.5.1.9.1 1.1 0 .4-.1 1-.4 1.1-.8.2-.4.2-.8.1-.9z" fill="white"/>
+          </svg>
+          Написать в WhatsApp
+        </a>
+        <p style="font-size:.8rem;color:#9CA3AF;margin-top:4px">Выберите удобный мессенджер — ответим быстро</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+  var desktop = document.getElementById('cta-desktop');
+  var mobile = document.getElementById('cta-mobile');
+
+  if (isMobile) {
+    mobile.style.display = 'flex';
+  } else {
+    desktop.style.display = 'flex';
+    // Генерируем QR после загрузки qrcode.js
+    function tryQR() {
+      if (window.QRCode) {
+        new QRCode(document.getElementById('qr-code'), {
+          text: 'https://t.me/English_alina752_bot',
+          width: 132,
+          height: 132,
+          colorDark: '#0c7a1e',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.M
+        });
+      } else {
+        setTimeout(tryQR, 100);
+      }
+    }
+    tryQR();
+  }
+})();
+</script>
+
+<!-- ============ CTA BANNER — замена формы email  конец============ -->
+
+
+
+
+<!-- ============ CTA BANNER ============ 
 <section class="py-16 relative overflow-hidden" style="background:linear-gradient(to right,#f9fafb,#f3f4f6)">
   <div class="container mx-auto px-4">
     <div style="max-width:56rem;margin:0 auto;text-align:center;background:rgba(255,255,255,.8);backdrop-filter:blur(12px);border-radius:1.5rem;padding:3rem;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);border:1px solid rgba(255,255,255,.5)">
@@ -580,7 +689,7 @@ html{scroll-behavior:smooth}
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- ============ FINAL CTA ============ -->
 <section class="py-24 text-white" style="background:#0EB623">
@@ -714,6 +823,6 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
   });
 });
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </body>
 </html>
