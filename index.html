@@ -95,8 +95,34 @@
 
 *,:before,:after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-scroll-snap-strictness:proximity;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246/.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}*,:before,:after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:Roboto,sans-serif;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit;overflow-x:hidden}hr{height:0;color:inherit;border-top-width:1px}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}small{font-size:80%}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}blockquote,dl,dd,h1,h2,h3,h4,h5,h6,hr,figure,p,pre{margin:0}ol,ul,menu{list-style:none;margin:0;padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}button,[role=button]{cursor:pointer}:disabled{cursor:default}img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]{display:none}
 
-*{transition-property:all;transition-duration:.3s;transition-timing-function:cubic-bezier(.4,0,.2,1)}
-h2,h3{font-weight:500}
+/* Убираем анимацию градиента - ЭТО КЛЮЧЕВОЕ ИЗМЕНЕНИЕ! */
+.animated-gradient-text {
+  background: linear-gradient(90deg, #111827, #0EB623);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Убираем все лишние анимации, которые создают нагрузку */
+* {
+  transition-property: none;
+}
+
+/* Оставляем только необходимые transition для hover */
+.button-primary, .button-secondary, .quiz-opt, .quiz-btn-next, .quiz-cta-btn, .quiz-btn-restart, a, .nav-link {
+  transition-property: background-color, border-color, color, opacity, transform, box-shadow;
+  transition-duration: .2s;
+}
+
+/* Убираем hexagonFloat анимацию - она тоже создает нагрузку */
+.grid-pattern {
+  background-size: 60px 60px;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 17.32v34.64L30 60 0 51.96V17.32L30 0z' fill='%230EB623' fill-opacity='0.08'/%3E%3C/svg%3E");
+  /* animation удалена */
+}
+
+/* Оставляем только float для нужных элементов, но без анимации если не критично */
+@keyframes float{0%,to{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* Container */
 .container{width:100%;margin-left:auto;margin-right:auto;padding-left:1rem;padding-right:1rem}
@@ -111,17 +137,10 @@ h2,h3{font-weight:500}
 .button-secondary{font-weight:500;color:rgb(55 65 81);transition:color .2s}.button-secondary:hover{color:rgb(14 182 35)}
 .utility-link{font-size:.875rem;color:rgb(75 85 99);transition:color .2s}.utility-link:hover{color:rgb(14 182 35)}
 .glass-card{border:1px solid rgba(255,255,255,.2);background-color:rgba(255,255,255,.3);backdrop-filter:blur(12px);box-shadow:0 8px 32px rgba(14,182,35,.1)}
-.animated-gradient-text{-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 200%;animation:gradient 8s ease infinite;background-image:linear-gradient(90deg,#111827,#1f2937,#0eb623,#1f2937,#111827)}
 .line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .line-clamp-3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .shadow-glow{box-shadow:0 0 15px rgba(14,182,35,.2)}
 .shadow-glow-lg{box-shadow:0 0 30px rgba(14,182,35,.25)}
-.grid-pattern{background-size:60px 60px;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 17.32v34.64L30 60 0 51.96V17.32L30 0z' fill='%230EB623' fill-opacity='0.08'/%3E%3C/svg%3E");animation:hexagonFloat 25s linear infinite}
-
-@keyframes gradient{0%{background-position:0% 50%}50%{background-position:100% 50%}to{background-position:0% 50%}}
-@keyframes float{0%,to{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes hexagonFloat{0%{background-position:0 0}to{background-position:50px 50px}}
-@keyframes slideUp{0%{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
 /* ===== LAYOUT ===== */
 .min-h-screen{min-height:100vh}
@@ -375,9 +394,6 @@ h2,h3{font-weight:500}
 #mobile-menu{display:none}
 #mobile-menu.open{display:block}
 
-/* Smooth scroll */
-html{scroll-behavior:smooth}
-
 /* Logo placeholder */
 .logo-text{font-size:1.5rem;font-weight:700;color:#0EB623;letter-spacing:-.025em}
   </style>
@@ -410,31 +426,27 @@ html{scroll-behavior:smooth}
 <header class="sticky top-0 z-50 w-full bg-white" style="box-shadow:0 1px 0 #e5e7eb">
   <div class="max-w-\[1200px\] mx-auto px-4">
     <div class="flex items-center justify-between" style="height:5rem">
-      <!-- Logo -->
       <a href="/site/" class="flex items-center">
         <span class="logo-text">Online English lessons</span>
       </a>
-      <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center space-x-4">
         <a href="#about-course" class="nav-link">О курсе</a>
         <a href="#teacher" class="nav-link">Преподаватель</a>
         <a href="#program" class="nav-link">Программа</a>
         <a href="#reviews" class="nav-link">Отзывы</a>
       </nav>
-      <!-- Mobile Burger -->
       <button class="lg:hidden focus:outline-none" id="mobileMenuBtn">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
       </button>
     </div>
-    <!-- Mobile Menu -->
-<div id="mobile-menu" class="lg:hidden border-t border-gray-200" style="margin-top:-10px;padding-top:0px;padding-bottom:0px">
-  <nav style="display:flex;flex-direction:column;gap:0">
-    <a href="#about-course" class="nav-link" style="padding:1px 16px;margin:0">О курсе</a>
-    <a href="#teacher" class="nav-link" style="padding:1px 16px;margin:0">Преподаватель</a>
-    <a href="#program" class="nav-link" style="padding:1px 16px;margin:0">Программа</a>
-    <a href="#reviews" class="nav-link" style="padding:1px 16px;margin:0">Отзывы</a>
-  </nav>
-</div>
+    <div id="mobile-menu" class="lg:hidden border-t border-gray-200" style="margin-top:-10px;padding-top:0px;padding-bottom:0px">
+      <nav style="display:flex;flex-direction:column;gap:0">
+        <a href="#about-course" class="nav-link" style="padding:1px 16px;margin:0">О курсе</a>
+        <a href="#teacher" class="nav-link" style="padding:1px 16px;margin:0">Преподаватель</a>
+        <a href="#program" class="nav-link" style="padding:1px 16px;margin:0">Программа</a>
+        <a href="#reviews" class="nav-link" style="padding:1px 16px;margin:0">Отзывы</a>
+      </nav>
+    </div>
   </div>
 </header>
 
@@ -442,7 +454,6 @@ html{scroll-behavior:smooth}
 
 <!-- ============ HERO ============ -->
 <section id="about-course" class="relative w-full overflow-hidden bg-white" style="min-height:560px">
-  <!-- Blurs -->
   <div class="absolute inset-0 bg-white">
     <div class="absolute" style="right:-15.84%;top:46.72%;bottom:-39.38%;left:47.33%;background:rgba(14,182,35,.5);filter:blur(325px)"></div>
     <div class="absolute" style="right:-39.15%;top:0;bottom:-16.48%;left:60.9%;background:rgba(255,123,0,.2);filter:blur(325px)"></div>
@@ -459,9 +470,7 @@ html{scroll-behavior:smooth}
         Online English lessons подготовка к экзаменам, разговорный для путешествий, IT-английский.
 		Прозрачная стоимость разовых занятий и абонементов
       </p>
-      <!-- CTA Form -->
       <div class="flex flex-col items-center justify-center" style="gap:1rem;max-width:32rem;margin:2rem auto 0">
-        <!-- Google sign-up row -->
         <div class="flex flex-col sm:flex-row items-center w-full" style="gap:.5rem">
           <button type="button" class="flex-shrink-0 py-3 px-4 border border-gray-300 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 group w-full sm:w-auto flex items-center justify-center font-medium">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
@@ -472,13 +481,11 @@ html{scroll-behavior:smooth}
             </svg>
             <span class="ml-2 text-gray-700 sm:hidden">Sign up with Google</span>
           </button>
-
           <div class="sm:hidden w-full flex items-center my-1">
             <div class="flex-grow border-t border-gray-300"></div>
             <span class="px-3 text-sm text-gray-500">Or</span>
             <div class="flex-grow border-t border-gray-300"></div>
           </div>
-
           <div class="w-full flex">
             <input type="email" placeholder="Enter your email" id="heroEmail"
               class="flex-grow px-4 py-3 border border-gray-300 rounded-l-xl focus:outline-none focus:border-\[\#0EB623\] focus:ring-1"
@@ -620,15 +627,12 @@ html{scroll-behavior:smooth}
 <section class="py-16 relative overflow-hidden" style="background:linear-gradient(to right,#f9fafb,#f3f4f6)">
   <div class="container mx-auto px-4">
     <div style="max-width:56rem;margin:0 auto;text-align:center;background:rgba(255,255,255,.8);backdrop-filter:blur(12px);border-radius:1.5rem;padding:3rem;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);border:1px solid rgba(255,255,255,.5)">
-
       <h2 class="text-4xl font-medium mb-4">
         Начните говорить по-английски <span style="color:#0EB623">уже сегодня</span>
       </h2>
       <p class="text-gray-600 mb-10">
         Запишитесь на бесплатный пробный урок и убедитесь в эффективности методики
       </p>
-
-      <!-- ДЕСКТОП: QR код -->
       <div id="cta-desktop" style="display:none;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap">
         <div style="flex-shrink:0">
           <div id="qr-code" style="width:148px;height:148px;border-radius:16px;overflow:hidden;border:1px solid rgba(14,182,35,.25);padding:8px;background:#fff;box-shadow:0 0 20px rgba(14,182,35,.12)"></div>
@@ -654,8 +658,6 @@ html{scroll-behavior:smooth}
           </div>
         </div>
       </div>
-
-      <!-- МОБАЙЛ: кнопки мессенджеров -->
       <div id="cta-mobile" style="display:none;flex-direction:column;align-items:center;gap:12px;max-width:360px;margin:0 auto">
         <a href="https://t.me/English_alina752_bot"
           style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:14px 24px;border-radius:100px;background:rgba(14,182,35,.08);border:1px solid rgba(14,182,35,.3);color:#0c7a1e;font-weight:500;font-size:1rem;text-decoration:none;transition:all .2s"
@@ -679,26 +681,19 @@ html{scroll-behavior:smooth}
         </a>
         <p style="font-size:.8rem;color:#9CA3AF;margin-top:4px">Выберите удобный мессенджер — ответим быстро</p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============ FINAL CTA → ТЕСТ НА УРОВЕНЬ АНГЛИЙСКОГО ============ -->
+<!-- ============ ТЕСТ НА УРОВЕНЬ ============ -->
 <section id="quiz-section" class="py-20">
   <div class="container mx-auto px-4">
-
-    <!-- Заголовок секции -->
     <div class="text-center mb-10">
       <h2 class="text-4xl font-medium mb-4 text-white">Узнайте свой уровень английского</h2>
       <div class="w-24 h-1 mx-auto rounded-full" style="background:rgba(255,255,255,.5)"></div>
       <p class="mt-4" style="color:rgba(255,255,255,.85);font-size:1rem">25 вопросов · уровни A1–C1 · результат сразу</p>
     </div>
-
-    <!-- Карточка теста -->
     <div class="quiz-card" id="quiz-card">
-
-      <!-- Начальный экран -->
       <div id="quiz-start">
         <div class="quiz-header">
           <h2>Тест на уровень английского</h2>
@@ -720,10 +715,7 @@ html{scroll-behavior:smooth}
         </div>
         <button class="quiz-btn-next" id="startQuizBtn">Начать тест →</button>
       </div>
-
-      <!-- Вопросы -->
       <div id="quiz-body" style="display:none"></div>
-
     </div>
   </div>
 </section>
@@ -802,17 +794,10 @@ html{scroll-behavior:smooth}
   </div>
 </footer>
 
-<!-- ============ ВЕСЬ ОПТИМИЗИРОВАННЫЙ JAVASCRIPT С DEFER ============ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 <script defer>
-// =================================================================
-// ВЕСЬ КОД ВЫПОЛНЯЕТСЯ ТОЛЬКО ПОСЛЕ ПОЛНОЙ ЗАГРУЗКИ HTML
-// Это ключевое изменение для оптимизации!
-// =================================================================
-
 (function() {
-    // --- ЛЕНИВАЯ ЗАГРУЗКА ОПРОСНИКА ---
-    // Данные вопросов (не выполняются до инициализации)
+    // Данные вопросов (инициализируются только при старте теста)
     const questions = [
       { q: "___ you like coffee?", opts: ["Do","Does","Are","Is"], a: 0, level: "A1" },
       { q: "She ___ to school every day.", opts: ["go","goes","going","gone"], a: 1, level: "A1" },
@@ -843,7 +828,7 @@ html{scroll-behavior:smooth}
 
     const TELEGRAM_URL = 'https://t.me/English_alina752_bot';
     let current = 0, score = 0, answered = false;
-    let quizInitialized = false;
+    let quizStarted = false;
 
     function levelBadgeStyle(l) {
       const map = {
@@ -877,7 +862,7 @@ html{scroll-behavior:smooth}
       `;
     }
 
-    function choose(i) {
+    window.chooseQuiz = function(i) {
       if (answered) return;
       answered = true;
       const q = questions[current];
@@ -893,45 +878,40 @@ html{scroll-behavior:smooth}
         document.getElementById('quiz-fb').innerHTML = '<span style="color:#7F1D1D">✗ Неправильно.</span>';
       }
       document.getElementById('quiz-next').disabled = false;
-    }
+    };
 
-    function nextQuestion() {
+    window.nextQuizQuestion = function() {
       current++;
       answered = false;
       renderQuestion();
-    }
+    };
 
     function getResult(s, total) {
       const p = s / total;
       if (p < 0.2) return {
         name: 'A1 — Начинающий', style: 'background:#ECFDF5;color:#065F46',
-        ctaTitle: '🚀 Отличное начало! Мы поможем расти быстрее',
-        ctaText: 'Даже с нулевого уровня до уверенного разговора — реально. Наши преподаватели выстроят путь именно для вас. Запишитесь на бесплатный пробный урок и начните уже сегодня!'
+        ctaTitle: 'Отличное начало! Мы поможем расти быстрее',
+        ctaText: 'Даже с нулевого уровня до уверенного разговора — реально. Запишитесь на бесплатный пробный урок!'
       };
       if (p < 0.4) return {
         name: 'A2 — Элементарный', style: 'background:#EFF6FF;color:#1E40AF',
-        ctaTitle: '📈 Хорошая база — давайте выведем вас на новый уровень!',
-        ctaText: 'Вы уже знаете основы. Занятия с нами помогут вам быстро перейти к живому общению, расширить словарный запас и говорить без страха.'
+        ctaTitle: 'Хорошая база — давайте выведем вас на новый уровень!',
+        ctaText: 'Вы уже знаете основы. Занятия с нами помогут вам быстро перейти к живому общению.'
       };
       if (p < 0.6) return {
         name: 'B1 — Средний', style: 'background:#F5F3FF;color:#5B21B6',
-        ctaTitle: '💬 Хороший результат! Давайте выйдем на свободное общение',
-        ctaText: 'Вы уже можете объясниться, но хочется большего? Наши уроки помогут закрыть грамматические пробелы и заговорить увереннее в любой ситуации.'
+        ctaTitle: 'Хороший результат! Давайте выйдем на свободное общение',
+        ctaText: 'Вы уже можете объясниться, но хочется большего? Наши уроки помогут заговорить увереннее.'
       };
       if (p < 0.8) return {
         name: 'B2 — Выше среднего', style: 'background:#FFFBEB;color:#92400E',
-        ctaTitle: '🌟 Отличный уровень! До свободного владения — совсем немного',
-        ctaText: 'Запишитесь к нам — и мы поможем отточить нюансы, избавиться от акцента и освоить деловой или академический английский.'
-      };
-      if (p < 0.96) return {
-        name: 'C1 — Продвинутый', style: 'background:#FEF2F2;color:#7F1D1D',
-        ctaTitle: '🏆 Впечатляющий результат! Доведём до совершенства',
-        ctaText: 'Вы уже на высоком уровне. Курс Advanced у нас поможет освоить сложную лексику, идиомы и стиль носителя языка. Не останавливайтесь!'
+        ctaTitle: 'Отличный уровень! До свободного владения — совсем немного',
+        ctaText: 'Запишитесь к нам — и мы поможем отточить нюансы.'
       };
       return {
-        name: 'C2 — Мастерство', style: 'background:#FEF2F2;color:#7F1D1D',
-        ctaTitle: '🎓 Исключительный результат!',
-        ctaText: 'Ваш английский на уровне носителя. Хотите преподавать или работать международно? Мы поможем с карьерным развитием и профессиональным английским.'
+        name: 'C1 — Продвинутый', style: 'background:#FEF2F2;color:#7F1D1D',
+        ctaTitle: 'Впечатляющий результат! Доведём до совершенства',
+        ctaText: 'Вы уже на высоком уровне. Не останавливайтесь!'
       };
     }
 
@@ -959,56 +939,26 @@ html{scroll-behavior:smooth}
       `;
     }
 
-    function restartQuiz() {
+    window.restartQuiz = function() {
       current = 0; score = 0; answered = false;
       renderQuestion();
-    }
+    };
 
-    function startQuiz() {
+    window.startQuiz = function() {
+      if (quizStarted) return;
+      quizStarted = true;
       document.getElementById('quiz-start').style.display = 'none';
       document.getElementById('quiz-body').style.display = 'block';
       renderQuestion();
+    };
+
+    // Ленивая инициализация кнопки старта
+    const startBtn = document.getElementById('startQuizBtn');
+    if (startBtn) {
+      startBtn.onclick = function() { window.startQuiz(); };
     }
 
-    // Глобальные функции для onclick в динамическом HTML
-    window.chooseQuiz = choose;
-    window.nextQuizQuestion = nextQuestion;
-    window.restartQuiz = restartQuiz;
-    window.startQuiz = startQuiz;
-
-    // --- Ленивая инициализация опросника ---
-    function initQuizLazy() {
-      if (quizInitialized) return;
-      quizInitialized = true;
-      const startBtn = document.getElementById('startQuizBtn');
-      if (startBtn) {
-        startBtn.onclick = function() { startQuiz(); };
-      }
-    }
-
-    // Отслеживаем появление секции с опросником
-    const quizSection = document.getElementById('quiz-section');
-    if (window.IntersectionObserver && quizSection) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            initQuizLazy();
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { rootMargin: '200px' });
-      observer.observe(quizSection);
-    } else if (quizSection) {
-      // Fallback для старых браузеров
-      window.addEventListener('scroll', function onScroll() {
-        if (quizSection.getBoundingClientRect().top < window.innerHeight + 200) {
-          initQuizLazy();
-          window.removeEventListener('scroll', onScroll);
-        }
-      });
-    }
-
-    // --- QR код и адаптация ---
+    // QR код и адаптация
     setTimeout(function() {
       var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
       var desktop = document.getElementById('cta-desktop');
@@ -1017,7 +967,7 @@ html{scroll-behavior:smooth}
         mobile.style.display = 'flex';
       } else if (desktop) {
         desktop.style.display = 'flex';
-        if (window.QRCode) {
+        if (window.QRCode && document.getElementById('qr-code')) {
           new QRCode(document.getElementById('qr-code'), {
             text: 'https://t.me/English_alina752_bot',
             width: 132,
@@ -1030,7 +980,7 @@ html{scroll-behavior:smooth}
       }
     }, 100);
 
-    // --- Плавная прокрутка для всех якорных ссылок ---
+    // Плавная прокрутка
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const targetId = this.getAttribute('href');
@@ -1043,7 +993,7 @@ html{scroll-behavior:smooth}
       });
     });
 
-    // --- Мобильное меню ---
+    // Мобильное меню
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuBtn && mobileMenu) {
@@ -1057,29 +1007,8 @@ html{scroll-behavior:smooth}
       });
     }
 
-    // --- Hover эффекты для карточек программы ---
-    document.querySelectorAll('.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-4 .bg-gray-50').forEach(card => {
-      const h3 = card.querySelector('h3');
-      if (card && h3) {
-        card.addEventListener('mouseenter', () => {
-          card.style.boxShadow = '0 20px 60px -15px rgba(14,182,35,0.15)';
-          h3.style.color = '#0EB623';
-        });
-        card.addEventListener('mouseleave', () => {
-          card.style.boxShadow = '';
-          h3.style.color = '';
-        });
-      }
-    });
-
-    // --- Hover для кнопки отправки Hero ---
+    // Обработка email
     const heroSubmitBtn = document.getElementById('heroSubmitBtn');
-    if (heroSubmitBtn) {
-      heroSubmitBtn.addEventListener('mouseenter', () => heroSubmitBtn.style.background = '#0EA620');
-      heroSubmitBtn.addEventListener('mouseleave', () => heroSubmitBtn.style.background = '#0EB623');
-    }
-
-    // --- Простая обработка email формы (демо) ---
     if (heroSubmitBtn) {
       heroSubmitBtn.addEventListener('click', function() {
         const email = document.getElementById('heroEmail').value;
