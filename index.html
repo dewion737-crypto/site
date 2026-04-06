@@ -421,13 +421,8 @@ html{scroll-behavior:smooth}
         <a href="#program" class="nav-link">Программа</a>
         <a href="#reviews" class="nav-link">Отзывы</a>
       </nav>
-      <!-- CTA Buttons -->
-    <!--  <div class="hidden lg:flex items-center space-x-4">
-        <a href="#" class="button-secondary">Login</a>
-        <a href="#" class="button-primary">Contact Us</a>
-      </div> -->
       <!-- Mobile Burger -->
-      <button class="lg:hidden focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <button class="lg:hidden focus:outline-none" id="mobileMenuBtn">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
       </button>
     </div>
@@ -485,10 +480,10 @@ html{scroll-behavior:smooth}
           </div>
 
           <div class="w-full flex">
-            <input type="email" placeholder="Enter your email"
+            <input type="email" placeholder="Enter your email" id="heroEmail"
               class="flex-grow px-4 py-3 border border-gray-300 rounded-l-xl focus:outline-none focus:border-\[\#0EB623\] focus:ring-1"
               style="font-family:inherit">
-            <button type="submit"
+            <button type="submit" id="heroSubmitBtn"
               class="bg-\[\#0EB623\] hover:bg-\[\#0EA620\] text-white font-medium px-6 py-3 rounded-r-xl shadow-glow hover:shadow-glow-lg transition-all duration-300 flex items-center group"
               style="white-space:nowrap">
               запись на консультацию
@@ -514,9 +509,6 @@ html{scroll-behavior:smooth}
           <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-[#0EB623] shadow-xl">
             <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Преподаватель Анна" class="w-full h-full object-cover">
           </div>
-        <!--  <div class="absolute -bottom-2 -right-2 bg-[#0EB623] rounded-full p-3 shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
-          </div> -->
         </div>
       </div>
       <div class="md:w-2/3 text-center md:text-left">
@@ -624,33 +616,7 @@ html{scroll-behavior:smooth}
   </div>
 </section>
 
-<!-- ============ STATS (оставлен для красоты) ============ -->
-<!-- <section class="py-16 bg-gray-900 text-white">
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-      <div>
-        <div class="text-4xl md:text-5xl font-bold text-\[\#0EB623\] mb-4">1500+</div>
-        <div class="text-lg text-white">Довольных учеников</div>
-      </div>
-      <div>
-        <div class="text-4xl md:text-5xl font-bold text-\[\#0EB623\] mb-4">98%</div>
-        <div class="text-lg text-white">Успешных результатов</div>
-      </div>
-      <div>
-        <div class="text-4xl md:text-5xl font-bold text-\[\#0EB623\] mb-4">12+</div>
-        <div class="text-lg text-white">Лет на рынке</div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-
-<!-- ============ CTA BANNER — замена формы email ============ -->
-<!-- Вставить вместо блока с id/class CTA BANNER в index.html -->
-<!-- Подключить qrcode.js перед закрывающим </body>:
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
--->
-
+<!-- ============ CTA BANNER ============ -->
 <section class="py-16 relative overflow-hidden" style="background:linear-gradient(to right,#f9fafb,#f3f4f6)">
   <div class="container mx-auto px-4">
     <div style="max-width:56rem;margin:0 auto;text-align:center;background:rgba(255,255,255,.8);backdrop-filter:blur(12px);border-radius:1.5rem;padding:3rem;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);border:1px solid rgba(255,255,255,.5)">
@@ -718,39 +684,7 @@ html{scroll-behavior:smooth}
   </div>
 </section>
 
-<script>
-(function() {
-  var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
-  var desktop = document.getElementById('cta-desktop');
-  var mobile = document.getElementById('cta-mobile');
-
-  if (isMobile) {
-    mobile.style.display = 'flex';
-  } else {
-    desktop.style.display = 'flex';
-    // Генерируем QR после загрузки qrcode.js
-    function tryQR() {
-      if (window.QRCode) {
-        new QRCode(document.getElementById('qr-code'), {
-          text: 'https://t.me/English_alina752_bot',
-          width: 132,
-          height: 132,
-          colorDark: '#0c7a1e',
-          colorLight: '#ffffff',
-          correctLevel: QRCode.CorrectLevel.M
-        });
-      } else {
-        setTimeout(tryQR, 100);
-      }
-    }
-    tryQR();
-  }
-})();
-</script>
-
-<!-- ============ CTA BANNER — замена формы email  конец============ -->
-
-<!-- ============ FINAL CTA → ТЕСТ НА УРОВЕНЬ АНГЛИЙСКОГО — НАЧАЛО ============ -->
+<!-- ============ FINAL CTA → ТЕСТ НА УРОВЕНЬ АНГЛИЙСКОГО ============ -->
 <section id="quiz-section" class="py-20">
   <div class="container mx-auto px-4">
 
@@ -784,7 +718,7 @@ html{scroll-behavior:smooth}
             <div style="font-size:.8rem;color:#9CA3AF">время</div>
           </div>
         </div>
-        <button class="quiz-btn-next" onclick="startQuiz()">Начать тест →</button>
+        <button class="quiz-btn-next" id="startQuizBtn">Начать тест →</button>
       </div>
 
       <!-- Вопросы -->
@@ -793,48 +727,6 @@ html{scroll-behavior:smooth}
     </div>
   </div>
 </section>
-<!-- ============ FINAL CTA → ТЕСТ НА УРОВЕНЬ АНГЛИЙСКОГО — КОНЕЦ ============ -->
-
-
-<!-- ============ CTA BANNER ============ 
-<section class="py-16 relative overflow-hidden" style="background:linear-gradient(to right,#f9fafb,#f3f4f6)">
-  <div class="container mx-auto px-4">
-    <div style="max-width:56rem;margin:0 auto;text-align:center;background:rgba(255,255,255,.8);backdrop-filter:blur(12px);border-radius:1.5rem;padding:3rem;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);border:1px solid rgba(255,255,255,.5)">
-      <h2 class="text-4xl font-medium mb-4">
-        Начните говорить по-английски <span class="text-\[\#0EB623\]">уже сегодня</span>
-      </h2>
-      <p class="text-gray-600 mb-10">
-        Запишитесь на бесплатный пробный урок и убедитесь в эффективности методики
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center" style="gap:.75rem;max-width:40rem;margin:0 auto">
-        <input type="email" placeholder="Ваш e-mail"
-          class="flex-grow px-6 py-4 rounded-l-full border border-gray-300 focus:outline-none focus:ring-1"
-          style="font-family:inherit;min-width:0">
-        <button type="submit" class="text-white font-medium px-8 py-4 rounded-r-full flex items-center group transition-all duration-300"
-          style="background:#0EB623;white-space:nowrap">
-          Записаться
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<!-- ============ FINAL CTA ============ 
-<section class="py-24 text-white" style="background:#0EB623">
-  <div class="container mx-auto px-4">
-    <div style="max-width:48rem;margin:0 auto;text-align:center">
-      <h2 class="text-4xl font-medium mb-6">Готовы начать свой путь в английском?</h2>
-      <p class="text-lg mb-10" style="color:rgba(255,255,255,.9)">
-        Оставьте заявку, и мы подберём удобное время для пробного занятия
-      </p>
-      <a href="#" class="inline-flex items-center justify-center px-8 py-4 bg-white rounded-xl font-medium group transition-all duration-300" style="color:#0EB623">
-        Записаться на урок
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
-</section> -->
 
 </main>
 
@@ -910,209 +802,295 @@ html{scroll-behavior:smooth}
   </div>
 </footer>
 
-<script>
-// Hover effects for industry cards (сохранение оригинального поведения)
-document.querySelectorAll('.group.bg-white.rounded-2xl').forEach(card => {
-  const h3 = card.querySelector('h3');
-  if(card && h3) {
-    card.addEventListener('mouseenter', () => {
-      card.style.boxShadow = '0 20px 60px -15px rgba(14,182,35,0.15)';
-      h3.style.color = '#0EB623';
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.boxShadow = '';
-      h3.style.color = '';
-    });
-  }
-});
+<!-- ============ ВЕСЬ ОПТИМИЗИРОВАННЫЙ JAVASCRIPT С DEFER ============ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script defer>
+// =================================================================
+// ВЕСЬ КОД ВЫПОЛНЯЕТСЯ ТОЛЬКО ПОСЛЕ ПОЛНОЙ ЗАГРУЗКИ HTML
+// Это ключевое изменение для оптимизации!
+// =================================================================
 
-// Smooth submit button hover
-document.querySelectorAll('button[type=submit]').forEach(btn => {
-  btn.addEventListener('mouseenter', () => btn.style.background = '#0EA620');
-  btn.addEventListener('mouseleave', () => btn.style.background = '#0EB623');
-});
+(function() {
+    // --- ЛЕНИВАЯ ЗАГРУЗКА ОПРОСНИКА ---
+    // Данные вопросов (не выполняются до инициализации)
+    const questions = [
+      { q: "___ you like coffee?", opts: ["Do","Does","Are","Is"], a: 0, level: "A1" },
+      { q: "She ___ to school every day.", opts: ["go","goes","going","gone"], a: 1, level: "A1" },
+      { q: "There ___ a cat on the roof.", opts: ["am","are","is","be"], a: 2, level: "A1" },
+      { q: "I have ___ apple and ___ orange.", opts: ["a / a","an / an","a / an","an / a"], a: 2, level: "A1" },
+      { q: "What time ___ it?", opts: ["am","are","is","be"], a: 2, level: "A1" },
+      { q: "We ___ watching TV right now.", opts: ["is","am","are","be"], a: 2, level: "A2" },
+      { q: "He ___ to Paris last summer.", opts: ["go","goes","went","gone"], a: 2, level: "A2" },
+      { q: "I haven't seen her ___ Monday.", opts: ["for","since","ago","during"], a: 1, level: "A2" },
+      { q: "This is the most ___ film I've ever seen.", opts: ["interested","interesting","interest","interests"], a: 1, level: "A2" },
+      { q: "Can you speak ___ slowly, please?", opts: ["more","most","very","much"], a: 0, level: "A2" },
+      { q: "If it ___ tomorrow, we'll stay home.", opts: ["rain","rains","rained","will rain"], a: 1, level: "B1" },
+      { q: "She ___ be tired — she worked all night.", opts: ["must","can","should","would"], a: 0, level: "B1" },
+      { q: "He asked me where ___ from.", opts: ["I come","I came","do I come","did I come"], a: 1, level: "B1" },
+      { q: "I wish I ___ speak French.", opts: ["can","could","will","would"], a: 1, level: "B1" },
+      { q: "The book was written ___ a famous author.", opts: ["from","by","with","of"], a: 1, level: "B1" },
+      { q: "By the time she arrived, the film ___.", opts: ["started","has started","had started","was starting"], a: 2, level: "B2" },
+      { q: "Despite ___ tired, she finished the marathon.", opts: ["be","been","being","to be"], a: 2, level: "B2" },
+      { q: "It's high time you ___ a decision.", opts: ["make","makes","made","making"], a: 2, level: "B2" },
+      { q: "He ___ for three hours before the interview.", opts: ["has prepared","had been preparing","was preparing","prepared"], a: 1, level: "B2" },
+      { q: "Only after she left ___ the truth.", opts: ["he discovered","he did discover","did he discover","discovered he"], a: 2, level: "B2" },
+      { q: "The results were inconclusive, ___ further research is needed.", opts: ["so","because","therefore","however"], a: 2, level: "C1" },
+      { q: "She ___ for the post of director.", opts: ["was appointed","had appointed","has been appointing","appointed"], a: 0, level: "C1" },
+      { q: "The proposal was met with ___ resistance.", opts: ["considerable","considerable amount of","a considerable","considerately"], a: 0, level: "C1" },
+      { q: "___ the weather forecast, it will snow tonight.", opts: ["According to","According with","Accordingly to","According"], a: 0, level: "C1" },
+      { q: "She spoke with such ___ that everyone was convinced.", opts: ["conviction","convince","convinced","convincing"], a: 0, level: "C1" },
+    ];
 
-// Плавная прокрутка для всех якорных ссылок (дополнительно)
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    const targetId = this.getAttribute('href');
-    if (targetId === "#" || targetId === "") return;
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      e.preventDefault();
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const TELEGRAM_URL = 'https://t.me/English_alina752_bot';
+    let current = 0, score = 0, answered = false;
+    let quizInitialized = false;
+
+    function levelBadgeStyle(l) {
+      const map = {
+        A1: 'background:rgba(16,185,129,.12);color:#065F46',
+        A2: 'background:rgba(59,130,246,.12);color:#1E40AF',
+        B1: 'background:rgba(139,92,246,.12);color:#5B21B6',
+        B2: 'background:rgba(245,158,11,.12);color:#92400E',
+        C1: 'background:rgba(239,68,68,.12);color:#7F1D1D',
+      };
+      return map[l] || 'background:#f3f4f6;color:#374151';
     }
-  });
-});
+
+    function renderQuestion() {
+      if (current >= questions.length) { renderResult(); return; }
+      const q = questions[current];
+      const pct = Math.round((current / questions.length) * 100);
+      document.getElementById('quiz-body').innerHTML = `
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+        <div class="quiz-meta">
+          <span class="quiz-counter">Вопрос ${current + 1} / ${questions.length}</span>
+          <span class="quiz-level" style="${levelBadgeStyle(q.level)}">${q.level}</span>
+        </div>
+        <div class="quiz-question">${q.q}</div>
+        <div class="quiz-options" id="quiz-opts">
+          ${q.opts.map((o,i) => `<button class="quiz-opt" onclick="window.chooseQuiz(${i})">${o}</button>`).join('')}
+        </div>
+        <div class="quiz-feedback" id="quiz-fb"></div>
+        <button class="quiz-btn-next" id="quiz-next" onclick="window.nextQuizQuestion()" disabled>
+          ${current === questions.length - 1 ? 'Завершить тест' : 'Следующий →'}
+        </button>
+      `;
+    }
+
+    function choose(i) {
+      if (answered) return;
+      answered = true;
+      const q = questions[current];
+      const btns = document.querySelectorAll('.quiz-opt');
+      btns.forEach(b => b.disabled = true);
+      if (i === q.a) {
+        btns[i].classList.add('correct');
+        document.getElementById('quiz-fb').innerHTML = '<span style="color:#065F46">✓ Правильно!</span>';
+        score++;
+      } else {
+        btns[i].classList.add('wrong');
+        btns[q.a].classList.add('reveal');
+        document.getElementById('quiz-fb').innerHTML = '<span style="color:#7F1D1D">✗ Неправильно.</span>';
+      }
+      document.getElementById('quiz-next').disabled = false;
+    }
+
+    function nextQuestion() {
+      current++;
+      answered = false;
+      renderQuestion();
+    }
+
+    function getResult(s, total) {
+      const p = s / total;
+      if (p < 0.2) return {
+        name: 'A1 — Начинающий', style: 'background:#ECFDF5;color:#065F46',
+        ctaTitle: '🚀 Отличное начало! Мы поможем расти быстрее',
+        ctaText: 'Даже с нулевого уровня до уверенного разговора — реально. Наши преподаватели выстроят путь именно для вас. Запишитесь на бесплатный пробный урок и начните уже сегодня!'
+      };
+      if (p < 0.4) return {
+        name: 'A2 — Элементарный', style: 'background:#EFF6FF;color:#1E40AF',
+        ctaTitle: '📈 Хорошая база — давайте выведем вас на новый уровень!',
+        ctaText: 'Вы уже знаете основы. Занятия с нами помогут вам быстро перейти к живому общению, расширить словарный запас и говорить без страха.'
+      };
+      if (p < 0.6) return {
+        name: 'B1 — Средний', style: 'background:#F5F3FF;color:#5B21B6',
+        ctaTitle: '💬 Хороший результат! Давайте выйдем на свободное общение',
+        ctaText: 'Вы уже можете объясниться, но хочется большего? Наши уроки помогут закрыть грамматические пробелы и заговорить увереннее в любой ситуации.'
+      };
+      if (p < 0.8) return {
+        name: 'B2 — Выше среднего', style: 'background:#FFFBEB;color:#92400E',
+        ctaTitle: '🌟 Отличный уровень! До свободного владения — совсем немного',
+        ctaText: 'Запишитесь к нам — и мы поможем отточить нюансы, избавиться от акцента и освоить деловой или академический английский.'
+      };
+      if (p < 0.96) return {
+        name: 'C1 — Продвинутый', style: 'background:#FEF2F2;color:#7F1D1D',
+        ctaTitle: '🏆 Впечатляющий результат! Доведём до совершенства',
+        ctaText: 'Вы уже на высоком уровне. Курс Advanced у нас поможет освоить сложную лексику, идиомы и стиль носителя языка. Не останавливайтесь!'
+      };
+      return {
+        name: 'C2 — Мастерство', style: 'background:#FEF2F2;color:#7F1D1D',
+        ctaTitle: '🎓 Исключительный результат!',
+        ctaText: 'Ваш английский на уровне носителя. Хотите преподавать или работать международно? Мы поможем с карьерным развитием и профессиональным английским.'
+      };
+    }
+
+    function renderResult() {
+      const r = getResult(score, questions.length);
+      document.getElementById('quiz-body').innerHTML = `
+        <div class="quiz-result">
+          <div class="quiz-result-label">Правильных ответов</div>
+          <div class="quiz-result-score">${score}</div>
+          <div class="quiz-result-total">из ${questions.length}</div>
+          <span class="quiz-result-level" style="${r.style}">${r.name}</span>
+          <div class="quiz-cta">
+            <div class="quiz-cta-title">${r.ctaTitle}</div>
+            <div class="quiz-cta-text">${r.ctaText}</div>
+            <a href="${TELEGRAM_URL}" target="_blank" class="quiz-cta-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="12" fill="#29B6F6"/>
+                <path d="M5 10.5l12-4.7-1.7 10.2-3.4-3-1.7 1.7V12l5.1-4.7-6.4 3.8L5 10.5z" fill="white"/>
+              </svg>
+              Записаться на урок в Telegram
+            </a>
+          </div>
+          <button class="quiz-btn-restart" onclick="window.restartQuiz()">↺ Пройти тест заново</button>
+        </div>
+      `;
+    }
+
+    function restartQuiz() {
+      current = 0; score = 0; answered = false;
+      renderQuestion();
+    }
+
+    function startQuiz() {
+      document.getElementById('quiz-start').style.display = 'none';
+      document.getElementById('quiz-body').style.display = 'block';
+      renderQuestion();
+    }
+
+    // Глобальные функции для onclick в динамическом HTML
+    window.chooseQuiz = choose;
+    window.nextQuizQuestion = nextQuestion;
+    window.restartQuiz = restartQuiz;
+    window.startQuiz = startQuiz;
+
+    // --- Ленивая инициализация опросника ---
+    function initQuizLazy() {
+      if (quizInitialized) return;
+      quizInitialized = true;
+      const startBtn = document.getElementById('startQuizBtn');
+      if (startBtn) {
+        startBtn.onclick = function() { startQuiz(); };
+      }
+    }
+
+    // Отслеживаем появление секции с опросником
+    const quizSection = document.getElementById('quiz-section');
+    if (window.IntersectionObserver && quizSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            initQuizLazy();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '200px' });
+      observer.observe(quizSection);
+    } else if (quizSection) {
+      // Fallback для старых браузеров
+      window.addEventListener('scroll', function onScroll() {
+        if (quizSection.getBoundingClientRect().top < window.innerHeight + 200) {
+          initQuizLazy();
+          window.removeEventListener('scroll', onScroll);
+        }
+      });
+    }
+
+    // --- QR код и адаптация ---
+    setTimeout(function() {
+      var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+      var desktop = document.getElementById('cta-desktop');
+      var mobile = document.getElementById('cta-mobile');
+      if (isMobile && mobile) {
+        mobile.style.display = 'flex';
+      } else if (desktop) {
+        desktop.style.display = 'flex';
+        if (window.QRCode) {
+          new QRCode(document.getElementById('qr-code'), {
+            text: 'https://t.me/English_alina752_bot',
+            width: 132,
+            height: 132,
+            colorDark: '#0c7a1e',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+          });
+        }
+      }
+    }, 100);
+
+    // --- Плавная прокрутка для всех якорных ссылок ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === "#" || targetId === "") return;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // --- Мобильное меню ---
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', function() {
+        mobileMenu.classList.toggle('open');
+      });
+      document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+        });
+      });
+    }
+
+    // --- Hover эффекты для карточек программы ---
+    document.querySelectorAll('.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-4 .bg-gray-50').forEach(card => {
+      const h3 = card.querySelector('h3');
+      if (card && h3) {
+        card.addEventListener('mouseenter', () => {
+          card.style.boxShadow = '0 20px 60px -15px rgba(14,182,35,0.15)';
+          h3.style.color = '#0EB623';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.boxShadow = '';
+          h3.style.color = '';
+        });
+      }
+    });
+
+    // --- Hover для кнопки отправки Hero ---
+    const heroSubmitBtn = document.getElementById('heroSubmitBtn');
+    if (heroSubmitBtn) {
+      heroSubmitBtn.addEventListener('mouseenter', () => heroSubmitBtn.style.background = '#0EA620');
+      heroSubmitBtn.addEventListener('mouseleave', () => heroSubmitBtn.style.background = '#0EB623');
+    }
+
+    // --- Простая обработка email формы (демо) ---
+    if (heroSubmitBtn) {
+      heroSubmitBtn.addEventListener('click', function() {
+        const email = document.getElementById('heroEmail').value;
+        if (email) {
+          alert('Спасибо! Мы свяжемся с вами по email: ' + email);
+        } else {
+          alert('Пожалуйста, введите email');
+        }
+      });
+    }
+})();
 </script>
-<script>
-document.querySelectorAll('#mobile-menu a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.getElementById('mobile-menu').classList.remove('open');
-  });
-});
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<!-- ===== QUIZ SCRIPT — НАЧАЛО ===== -->
-<script>
-const questions = [
-  { q: "___ you like coffee?", opts: ["Do","Does","Are","Is"], a: 0, level: "A1" },
-  { q: "She ___ to school every day.", opts: ["go","goes","going","gone"], a: 1, level: "A1" },
-  { q: "There ___ a cat on the roof.", opts: ["am","are","is","be"], a: 2, level: "A1" },
-  { q: "I have ___ apple and ___ orange.", opts: ["a / a","an / an","a / an","an / a"], a: 2, level: "A1" },
-  { q: "What time ___ it?", opts: ["am","are","is","be"], a: 2, level: "A1" },
-  { q: "We ___ watching TV right now.", opts: ["is","am","are","be"], a: 2, level: "A2" },
-  { q: "He ___ to Paris last summer.", opts: ["go","goes","went","gone"], a: 2, level: "A2" },
-  { q: "I haven't seen her ___ Monday.", opts: ["for","since","ago","during"], a: 1, level: "A2" },
-  { q: "This is the most ___ film I've ever seen.", opts: ["interested","interesting","interest","interests"], a: 1, level: "A2" },
-  { q: "Can you speak ___ slowly, please?", opts: ["more","most","very","much"], a: 0, level: "A2" },
-  { q: "If it ___ tomorrow, we'll stay home.", opts: ["rain","rains","rained","will rain"], a: 1, level: "B1" },
-  { q: "She ___ be tired — she worked all night.", opts: ["must","can","should","would"], a: 0, level: "B1" },
-  { q: "He asked me where ___ from.", opts: ["I come","I came","do I come","did I come"], a: 1, level: "B1" },
-  { q: "I wish I ___ speak French.", opts: ["can","could","will","would"], a: 1, level: "B1" },
-  { q: "The book was written ___ a famous author.", opts: ["from","by","with","of"], a: 1, level: "B1" },
-  { q: "By the time she arrived, the film ___.", opts: ["started","has started","had started","was starting"], a: 2, level: "B2" },
-  { q: "Despite ___ tired, she finished the marathon.", opts: ["be","been","being","to be"], a: 2, level: "B2" },
-  { q: "It's high time you ___ a decision.", opts: ["make","makes","made","making"], a: 2, level: "B2" },
-  { q: "He ___ for three hours before the interview.", opts: ["has prepared","had been preparing","was preparing","prepared"], a: 1, level: "B2" },
-  { q: "Only after she left ___ the truth.", opts: ["he discovered","he did discover","did he discover","discovered he"], a: 2, level: "B2" },
-  { q: "The results were inconclusive, ___ further research is needed.", opts: ["so","because","therefore","however"], a: 2, level: "C1" },
-  { q: "She ___ for the post of director.", opts: ["was appointed","had appointed","has been appointing","appointed"], a: 0, level: "C1" },
-  { q: "The proposal was met with ___ resistance.", opts: ["considerable","considerable amount of","a considerable","considerately"], a: 0, level: "C1" },
-  { q: "___ the weather forecast, it will snow tonight.", opts: ["According to","According with","Accordingly to","According"], a: 0, level: "C1" },
-  { q: "She spoke with such ___ that everyone was convinced.", opts: ["conviction","convince","convinced","convincing"], a: 0, level: "C1" },
-];
-
-const TELEGRAM_URL = 'https://t.me/English_alina752_bot';
-
-let current = 0, score = 0, answered = false;
-
-function levelBadgeStyle(l) {
-  const map = {
-    A1: 'background:rgba(16,185,129,.12);color:#065F46',
-    A2: 'background:rgba(59,130,246,.12);color:#1E40AF',
-    B1: 'background:rgba(139,92,246,.12);color:#5B21B6',
-    B2: 'background:rgba(245,158,11,.12);color:#92400E',
-    C1: 'background:rgba(239,68,68,.12);color:#7F1D1D',
-  };
-  return map[l] || 'background:#f3f4f6;color:#374151';
-}
-
-function startQuiz() {
-  document.getElementById('quiz-start').style.display = 'none';
-  document.getElementById('quiz-body').style.display = 'block';
-  renderQuestion();
-}
-
-function renderQuestion() {
-  if (current >= questions.length) { renderResult(); return; }
-  const q = questions[current];
-  const pct = Math.round((current / questions.length) * 100);
-  document.getElementById('quiz-body').innerHTML = `
-    <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
-    <div class="quiz-meta">
-      <span class="quiz-counter">Вопрос ${current + 1} / ${questions.length}</span>
-      <span class="quiz-level" style="${levelBadgeStyle(q.level)}">${q.level}</span>
-    </div>
-    <div class="quiz-question">${q.q}</div>
-    <div class="quiz-options" id="quiz-opts">
-      ${q.opts.map((o,i) => `<button class="quiz-opt" onclick="choose(${i})">${o}</button>`).join('')}
-    </div>
-    <div class="quiz-feedback" id="quiz-fb"></div>
-    <button class="quiz-btn-next" id="quiz-next" onclick="nextQuestion()" disabled>
-      ${current === questions.length - 1 ? 'Завершить тест' : 'Следующий →'}
-    </button>
-  `;
-}
-
-function choose(i) {
-  if (answered) return;
-  answered = true;
-  const q = questions[current];
-  const btns = document.querySelectorAll('.quiz-opt');
-  btns.forEach(b => b.disabled = true);
-  if (i === q.a) {
-    btns[i].classList.add('correct');
-    document.getElementById('quiz-fb').innerHTML = '<span style="color:#065F46">✓ Правильно!</span>';
-    score++;
-  } else {
-    btns[i].classList.add('wrong');
-    btns[q.a].classList.add('reveal');
-    document.getElementById('quiz-fb').innerHTML = '<span style="color:#7F1D1D">✗ Неправильно.</span>';
-  }
-  document.getElementById('quiz-next').disabled = false;
-}
-
-function nextQuestion() {
-  current++;
-  answered = false;
-  renderQuestion();
-}
-
-function getResult(s, total) {
-  const p = s / total;
-  if (p < 0.2) return {
-    name: 'A1 — Начинающий', style: 'background:#ECFDF5;color:#065F46',
-    ctaTitle: '🚀 Отличное начало! Мы поможем расти быстрее',
-    ctaText: 'Даже с нулевого уровня до уверенного разговора — реально. Наши преподаватели выстроят путь именно для вас. Запишитесь на бесплатный пробный урок и начните уже сегодня!'
-  };
-  if (p < 0.4) return {
-    name: 'A2 — Элементарный', style: 'background:#EFF6FF;color:#1E40AF',
-    ctaTitle: '📈 Хорошая база — давайте выведем вас на новый уровень!',
-    ctaText: 'Вы уже знаете основы. Занятия с нами помогут вам быстро перейти к живому общению, расширить словарный запас и говорить без страха.'
-  };
-  if (p < 0.6) return {
-    name: 'B1 — Средний', style: 'background:#F5F3FF;color:#5B21B6',
-    ctaTitle: '💬 Хороший результат! Давайте выйдем на свободное общение',
-    ctaText: 'Вы уже можете объясниться, но хочется большего? Наши уроки помогут закрыть грамматические пробелы и заговорить увереннее в любой ситуации.'
-  };
-  if (p < 0.8) return {
-    name: 'B2 — Выше среднего', style: 'background:#FFFBEB;color:#92400E',
-    ctaTitle: '🌟 Отличный уровень! До свободного владения — совсем немного',
-    ctaText: 'Запишитесь к нам — и мы поможем отточить нюансы, избавиться от акцента и освоить деловой или академический английский.'
-  };
-  if (p < 0.96) return {
-    name: 'C1 — Продвинутый', style: 'background:#FEF2F2;color:#7F1D1D',
-    ctaTitle: '🏆 Впечатляющий результат! Доведём до совершенства',
-    ctaText: 'Вы уже на высоком уровне. Курс Advanced у нас поможет освоить сложную лексику, идиомы и стиль носителя языка. Не останавливайтесь!'
-  };
-  return {
-    name: 'C2 — Мастерство', style: 'background:#FEF2F2;color:#7F1D1D',
-    ctaTitle: '🎓 Исключительный результат!',
-    ctaText: 'Ваш английский на уровне носителя. Хотите преподавать или работать международно? Мы поможем с карьерным развитием и профессиональным английским.'
-  };
-}
-
-function renderResult() {
-  const r = getResult(score, questions.length);
-  document.getElementById('quiz-body').innerHTML = `
-    <div class="quiz-result">
-      <div class="quiz-result-label">Правильных ответов</div>
-      <div class="quiz-result-score">${score}</div>
-      <div class="quiz-result-total">из ${questions.length}</div>
-      <span class="quiz-result-level" style="${r.style}">${r.name}</span>
-      <div class="quiz-cta">
-        <div class="quiz-cta-title">${r.ctaTitle}</div>
-        <div class="quiz-cta-text">${r.ctaText}</div>
-        <a href="${TELEGRAM_URL}" target="_blank" class="quiz-cta-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="12" fill="#29B6F6"/>
-            <path d="M5 10.5l12-4.7-1.7 10.2-3.4-3-1.7 1.7V12l5.1-4.7-6.4 3.8L5 10.5z" fill="white"/>
-          </svg>
-          Записаться на урок в Telegram
-        </a>
-      </div>
-      <button class="quiz-btn-restart" onclick="restartQuiz()">↺ Пройти тест заново</button>
-    </div>
-  `;
-}
-
-function restartQuiz() {
-  current = 0; score = 0; answered = false;
-  renderQuestion();
-}
-</script>
-<!-- ===== QUIZ SCRIPT — КОНЕЦ ===== -->
-
 </body>
 </html>
