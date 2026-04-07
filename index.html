@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online English lessons | Изучай английский с нами</title>
 
- <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -85,11 +85,7 @@
           <div class="sm:hidden w-full flex items-center my-1">
 
           </div>
-<!-- Стало -->
-<!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer ></script>
-
-<!-- начало формы -->
+<!-- форма -->
 <div class="w-full flex" style="flex-direction: column; gap: 10px;">
 
   <!-- Honeypot — скрыт от людей, бот заполнит = блок -->
@@ -121,88 +117,6 @@
 
 </div>
 <!-- конец формы -->
-
-<script>
-(function () {
-
-  emailjs.init("2B5bk_mqnHOv-YGmG");
-
-  var MAX_CLICKS  = 3;
-  var STORAGE_KEY = "lesson_form_count";
-  var formReady   = false;
-  var sending     = false;
-
-  setTimeout(function () { formReady = true; }, 1500);
-
-  var btn    = document.getElementById("heroSubmitBtn");
-  var status = document.getElementById("formStatus");
-
-  var clickCount = parseInt(localStorage.getItem(STORAGE_KEY) || "0");
-  if (clickCount >= MAX_CLICKS) blockButton("Лимит заявок исчерпан");
-
-  btn.addEventListener("click", function () {
-
-    if (!formReady) return;
-
-    clickCount = parseInt(localStorage.getItem(STORAGE_KEY) || "0");
-    if (clickCount >= MAX_CLICKS) { blockButton("Лимит заявок исчерпан"); return; }
-
-    if (document.getElementById("honeypot").value !== "") return;
-
-    var email = document.getElementById("heroEmail").value.trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setStatus("Введите корректный email", "red");
-      return;
-    }
-
-    if (sending) return;
-    sending = true;
-    btn.disabled = true;
-    setStatus("Отправляем...", "#555");
-
-    document.getElementById("submitTime").value = new Date().toLocaleString("ru-RU");
-    document.getElementById("userEmail").value  = email;
-
-    emailjs.send("service_ia3mi5d", "template_nwz0lak", {
-      email:       email,
-      user_email:  email,
-      submit_time: document.getElementById("submitTime").value
-    })
-    .then(function () {
-      clickCount++;
-      localStorage.setItem(STORAGE_KEY, clickCount);
-      if (clickCount >= MAX_CLICKS) {
-        blockButton("Заявка отправлена! Лимит исчерпан.");
-      } else {
-        setStatus("✅ Заявка отправлена! Мы свяжемся с вами.", "#0EB623");
-        document.getElementById("heroEmail").value = "";
-        btn.disabled = false;
-        sending = false;
-      }
-    })
-    .catch(function (err) {
-      setStatus("❌ Ошибка отправки. Попробуйте ещё раз.", "red");
-      console.error("EmailJS error:", err);
-      btn.disabled = false;
-      sending = false;
-    });
-  });
-
-  function blockButton(msg) {
-    btn.disabled = true;
-    btn.style.opacity = "0.5";
-    btn.style.cursor  = "not-allowed";
-    setStatus(msg, "#888");
-  }
-
-  function setStatus(msg, color) {
-    status.textContent = msg;
-    status.style.color = color;
-  }
-
-})();
-</script>
-<!-- Стало  конец-->
         </div>
       </div>
     </div>
@@ -283,9 +197,6 @@
   </div>
 </section>
 <!-- ============ ПРОГРАММА урока============ -->
-
-
-
 
 <!-- ============ ТЕСТ НА УРОВЕНЬ ============ -->
 <section id="quiz-section" class="py-20">
@@ -368,46 +279,6 @@
     </div>
   </div>
 </section>
-
-<script>
-  (function() {
-    // Находим все вопросы на странице внутри этого блока
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-      const questionDiv = item.querySelector('.faq-question');
-      const answerDiv = item.querySelector('.faq-answer');
-      const plusSpan = questionDiv.querySelector('span:first-child');
-      
-      questionDiv.addEventListener('click', function() {
-        const isOpen = answerDiv.style.display === 'block';
-        
-        // Закрываем все остальные ответы (опционально — чтобы открывался только один)
-        faqItems.forEach(otherItem => {
-          const otherAnswer = otherItem.querySelector('.faq-answer');
-          const otherPlus = otherItem.querySelector('.faq-question span:first-child');
-          if (otherAnswer && otherAnswer !== answerDiv) {
-            otherAnswer.style.display = 'none';
-            if (otherPlus) otherPlus.textContent = '+';
-            otherPlus.style.transform = 'rotate(0deg)';
-          }
-        });
-        
-        // Переключаем текущий
-        if (isOpen) {
-          answerDiv.style.display = 'none';
-          plusSpan.textContent = '+';
-          plusSpan.style.transform = 'rotate(0deg)';
-        } else {
-          answerDiv.style.display = 'block';
-          plusSpan.textContent = '−';
-          plusSpan.style.transform = 'rotate(0deg)';
-        }
-      });
-    });
-  })();
-</script>
-<!-- ============ КОНЕЦ FAQ БЛОКА ============ -->
 
 <!-- ============ CTA регистрация ============ -->
 <section class="py-16 relative overflow-hidden" style="background:linear-gradient(to right,#f9fafb,#f3f4f6)">
@@ -522,8 +393,6 @@
  
 <!-- ============ ОТЗЫВЫ конец ============ -->
 
-
-
 </main>
 
 <!-- ============ FOOTER ============ -->
@@ -593,8 +462,11 @@
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
-<script defer>
+<!-- ============ ВСЕ СКРИПТЫ ПЕРЕД ЗАКРЫТИЕМ BODY ============ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
 (function() {
     // Данные вопросов (инициализируются только при старте теста)
     const questions = [
@@ -806,8 +678,99 @@
       });
     }
 
+    // EmailJS инициализация
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init("2B5bk_mqnHOv-YGmG");
+    }
 
+    // Обработчик формы
+    var MAX_CLICKS  = 3;
+    var STORAGE_KEY = "lesson_form_count";
+    var formReady   = false;
+    var sending     = false;
+
+    setTimeout(function () { formReady = true; }, 1500);
+
+    var btn    = document.getElementById("heroSubmitBtn");
+    var status = document.getElementById("formStatus");
+
+    if (btn && status) {
+        var clickCount = parseInt(localStorage.getItem(STORAGE_KEY) || "0");
+        if (clickCount >= MAX_CLICKS) blockButton("Лимит заявок исчерпан");
+
+        btn.addEventListener("click", function () {
+
+            if (!formReady) return;
+
+            clickCount = parseInt(localStorage.getItem(STORAGE_KEY) || "0");
+            if (clickCount >= MAX_CLICKS) { blockButton("Лимит заявок исчерпан"); return; }
+
+            var honeypot = document.getElementById("honeypot");
+            if (honeypot && honeypot.value !== "") return;
+
+            var email = document.getElementById("heroEmail").value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                setStatus("Введите корректный email", "red");
+                return;
+            }
+
+            if (sending) return;
+            sending = true;
+            btn.disabled = true;
+            setStatus("Отправляем...", "#555");
+
+            var submitTime = document.getElementById("submitTime");
+            var userEmail = document.getElementById("userEmail");
+            if (submitTime) submitTime.value = new Date().toLocaleString("ru-RU");
+            if (userEmail) userEmail.value = email;
+
+            if (typeof emailjs !== 'undefined') {
+                emailjs.send("service_ia3mi5d", "template_nwz0lak", {
+                    email:       email,
+                    user_email:  email,
+                    submit_time: submitTime ? submitTime.value : ""
+                })
+                .then(function () {
+                    clickCount++;
+                    localStorage.setItem(STORAGE_KEY, clickCount);
+                    if (clickCount >= MAX_CLICKS) {
+                        blockButton("Заявка отправлена! Лимит исчерпан.");
+                    } else {
+                        setStatus("✅ Заявка отправлена! Мы свяжемся с вами.", "#0EB623");
+                        document.getElementById("heroEmail").value = "";
+                        btn.disabled = false;
+                        sending = false;
+                    }
+                })
+                .catch(function (err) {
+                    setStatus("❌ Ошибка отправки. Попробуйте ещё раз.", "red");
+                    console.error("EmailJS error:", err);
+                    btn.disabled = false;
+                    sending = false;
+                });
+            } else {
+                setStatus("❌ Сервис недоступен, попробуйте позже", "red");
+                btn.disabled = false;
+                sending = false;
+            }
+        });
+    }
+
+    function blockButton(msg) {
+        if (!btn) return;
+        btn.disabled = true;
+        btn.style.opacity = "0.5";
+        btn.style.cursor  = "not-allowed";
+        setStatus(msg, "#888");
+    }
+
+    function setStatus(msg, color) {
+        if (!status) return;
+        status.textContent = msg;
+        status.style.color = color;
+    }
 })();
 </script>
+
 </body>
 </html>
