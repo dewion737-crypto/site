@@ -387,8 +387,16 @@
 .left-\[65\.05\%\]{left:65.05%}
 
 /* Mobile menu */
-#mobile-menu{display:none}
-#mobile-menu.open{display:block}
+#mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease-out;
+  border-top: 1px solid #e5e7eb;
+}
+#mobile-menu.open {
+  max-height: 300px;
+  transition: max-height 0.25s ease-in;
+}
 
 /* Logo placeholder */
 .logo-text{font-size:1.5rem;font-weight:700;color:#0EB623;letter-spacing:-.025em}
