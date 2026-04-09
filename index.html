@@ -793,22 +793,6 @@
 
 </script>
 <script src="//code.tidio.co/e4ts0kpryl00nzibieutpn8fxpmju03y.js" async></script>
-<script>
-// Защита чата Tidio от конфликтов с плавной прокруткой
-(function() {
-    // Блокируем все клики внутри чата от всплытия наверх
-    function blockChatBubbling() {
-        const chatFrame = document.querySelector('#tidio-chat, iframe[title*="chat"], [id*="tidio"]');
-        if (chatFrame) {
-            chatFrame.addEventListener('click', function(e) {
-                e.stopPropagation();
-            }, true);
-        } else {
-            setTimeout(blockChatBubbling, 500);
-        }
-    }
-    blockChatBubbling();
-})();
-</script>	
+	
 </body>
 </html>
