@@ -793,6 +793,50 @@
 
 </script>
 <script src="//code.tidio.co/e4ts0kpryl00nzibieutpn8fxpmju03y.js" async></script>
+<script>
+// Фикс: запрещаем чату закрываться в первые 5 секунд после открытия
+(function() {
+    let justOpened = false;
+    let openTimer = null;
+    
+    function protectChat() {
+        if (window.tidioChatApi) {
+            // Оригинальный метод close
+            const originalClose = window.tidioChatApi.close;
+            
+            // Переопределяем close
+            window.tidioChatApi.close = function() {
+                if (justOpened) {
+                    // Если чат только что открыли — игнорируем закрытие
+                    console.log("Tidio: закрытие заблокировано (чат только что открыт)");
+                    return;
+                }
+                // Иначе закрываем как обычно
+                return originalClose.apply(this, arguments);
+            };
+            
+            // Следим за открытием
+            const originalOpen = window.tidioChatApi.open;
+            window.tidioChatApi.open = function() {
+                justOpened = true;
+                if (openTimer) clearTimeout(openTimer);
+                openTimer = setTimeout(function() {
+                    justOpened = false;
+                }, 5000); // 5 секунд защиты после открытия
+                return originalOpen.apply(this, arguments);
+            };
+        } else {
+            setTimeout(protectChat, 500);
+        }
+    }
+    
+    if (window.tidioChatApi) {
+        protectChat();
+    } else {
+        document.addEventListener("tidioChat-ready", protectChat);
+    }
+})();
+</script>
 	
 </body>
 </html>
