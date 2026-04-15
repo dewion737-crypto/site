@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Разговор по душам — AI-терапевт | English-lessons.online</title>
+<meta name="description" content="Эмпатичный AI-собеседник, который поможет снять тревогу и улучшить разговорный английский. Говорите о своих чувствах — ИИ поддержит и успокоит.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1db954;
+    --green-dark: #17a045;
+    --green-light: #e8f8ed;
+    --bg: #f0f2f5;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #555;
+    --border: #e0e4ea;
+    --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  .site-header { background: #fff; border-bottom: 1px solid var(--border); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 8px rgba(0,0,0,0.05); flex-wrap: wrap; gap: 12px; }
+  .site-logo { font-size: 1.1rem; font-weight: 800; color: var(--green); text-decoration: none; }
+  .site-nav { display: flex; gap: 28px; flex-wrap: wrap; }
+  .site-nav a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .site-nav a:hover { color: var(--green); }
+
+  .hero { background: linear-gradient(135deg, #0b3b5f 0%, #1a4a6f 100%); padding: 56px 20px 48px; text-align: center; color: white; }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.2); color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.2; max-width: 700px; margin: 0 auto 16px; }
+  .hero h1 span { color: var(--green); }
+  .hero p { max-width: 550px; margin: 0 auto; opacity: 0.9; font-size: 1rem; }
+
+  .page-wrap { max-width: 750px; margin: 0 auto; padding: 40px 20px 80px; }
+  .card { background: var(--card); border-radius: 24px; box-shadow: var(--shadow); padding: 28px; margin-bottom: 24px; }
+
+  .calm-bar { background: #2d3e50; border-radius: 30px; height: 30px; margin: 20px 0; position: relative; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); }
+  .calm-fill { background: linear-gradient(90deg, #4caf50, #8bc34a); height: 100%; width: 50%; border-radius: 30px; transition: width 0.5s ease; }
+  #calmText { position: absolute; top: 5px; left: 0; right: 0; text-align: center; color: white; font-weight: bold; text-shadow: 0 0 2px black; font-size: 14px; }
+
+  .chat { background: rgba(0,0,0,0.03); border-radius: 20px; height: 380px; overflow-y: auto; padding: 16px; margin: 20px 0; display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--border); }
+  .message { max-width: 85%; padding: 12px 18px; border-radius: 20px; font-size: 15px; line-height: 1.4; word-wrap: break-word; }
+  .user { background: var(--green); color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
+  .bot { background: #e9eef3; color: #1e2a3a; align-self: flex-start; border-bottom-left-radius: 5px; }
+
+  .controls { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
+  button { padding: 12px 24px; font-size: 16px; border: none; border-radius: 40px; cursor: pointer; font-weight: 600; transition: transform 0.1s, opacity 0.2s; font-family: inherit; }
+  button:active { transform: scale(0.97); }
+  .btn-record { background: #e74c3c; color: white; }
+  .btn-record.recording { background: #c0392b; animation: pulse 1s infinite; }
+  .btn-stop { background: #555; color: white; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+  .status { text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted); }
+  .tip-block { background: var(--green-light); border-radius: 16px; padding: 20px; margin-top: 24px; }
+  .tip-block h3 { font-size: 1rem; margin-bottom: 10px; color: var(--green-dark); }
+  .article-footer { border-top: 1px solid var(--border); padding-top: 20px; margin-top: 20px; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+  .article-footer a { color: var(--green); text-decoration: none; }
+  @media (max-width: 600px) {
+    .site-nav { display: none; }
+    .card { padding: 20px; }
+    .chat { height: 300px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="https://english-lessons.online" class="site-logo">Online English lessons</a>
+  <nav class="site-nav">
+    <a href="https://english-lessons.online">Главная</a>
+    <a href="https://english-lessons.online/#about-course">О курсе</a>
+    <a href="https://english-lessons.online/#teacher">Преподаватель</a>
+    <a href="https://english-lessons.online/#program">Программа</a>
+    <a href="https://english-lessons.online/#faq">FAQ</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">🤍 Эмпатичный AI-собеседник</div>
+  <h1>Разговор <span>по душам</span></h1>
+  <p>Вы можете говорить о своих чувствах на русском или английском. ИИ поддержит, успокоит и поможет справиться с тревогой.</p>
+</div>
+
+<div class="page-wrap">
+  <div class="card">
+    <h2 style="margin-bottom: 8px;">🗣️ Поговорите с AI-терапевтом</h2>
+    <p style="font-size:0.9rem; margin-bottom: 16px;">Нажмите «Начать разговор», скажите, что вас беспокоит. AI ответит мягко и по-человечески. Уровень спокойствия будет расти.</p>
+
+    <div class="calm-bar">
+      <div class="calm-fill" id="calmFill" style="width: 50%"></div>
+      <span id="calmText">Уровень спокойствия: 50%</span>
+    </div>
+
+    <div class="chat" id="chat">
+      <div class="message bot">Привет. Я здесь, чтобы выслушать. Расскажи, что тебя тревожит.</div>
+    </div>
+
+    <div class="controls">
+      <button id="recordBtn" class="btn-record">🎙️ Начать говорить</button>
+      <button id="stopBtn" class="btn-stop" disabled>⏹️ Закончить</button>
+    </div>
+    <div class="status" id="status">✅ Готов к разговору. Разрешите микрофон.</div>
+
+    <div class="tip-block">
+      <h3>💡 Как работает этот раздел?</h3>
+      <p>Ваш голос преобразуется в текст и отправляется эмпатичной нейросети. Она анализирует эмоции и даёт поддерживающий ответ. Вы можете говорить на русском или английском — AI ответит на том же языке. Шкала спокойствия поднимается, когда вы чувствуете себя лучше.</p>
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <p>© 2025 English-lessons.online — уроки английского с Ксенией, CELTA Cambridge</p>
+    <p><a href="https://english-lessons.online">Вернуться на главную</a></p>
+  </div>
+</div>
+
+<script>
+  // ⚠️ ВАШ СТАТИЧЕСКИЙ NGROK ДОМЕН (без https://)
+  const NGROK_DOMAIN = "rely-mobility-fraternal.ngrok-free.dev";
+  const WS_URL = `wss://${NGROK_DOMAIN}/ws`;
+
+  let ws = null;
+  let recognition = null;
+  let isRecording = false;
+
+  const chatDiv = document.getElementById('chat');
+  const recordBtn = document.getElementById('recordBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const statusSpan = document.getElementById('status');
+  const calmFill = document.getElementById('calmFill');
+  const calmText = document.getElementById('calmText');
+
+  function updateCalmScore(score) {
+    const percent = Math.min(100, Math.max(0, score));
+    calmFill.style.width = percent + '%';
+    calmText.innerText = `Уровень спокойствия: ${percent}%`;
+  }
+
+  function addMessage(text, isUser) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+    msgDiv.innerText = text;
+    chatDiv.appendChild(msgDiv);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+  }
+
+  function connectWebSocket() {
+    ws = new WebSocket(WS_URL);
+    ws.onopen = () => {
+      statusSpan.innerText = '🔌 Соединение с AI установлено. Говорите в микрофон.';
+      console.log('WebSocket connected');
+    };
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        addMessage(data.response, false);
+        updateCalmScore(data.calm_score);
+        if (data.emotion && (data.emotion.includes('тревога') || data.emotion.includes('гнев'))) {
+          statusSpan.innerText = '😟 Понимаю вашу тревогу. Дышите спокойно.';
+        } else {
+          statusSpan.innerText = '👍 Отлично. Продолжайте делиться.';
+        }
+      } catch(e) { console.error(e); }
+    };
+    ws.onerror = (err) => {
+      console.error(err);
+      statusSpan.innerText = '❌ Ошибка связи. Проверьте, запущен ли бэкенд в Colab.';
+    };
+    ws.onclose = () => {
+      statusSpan.innerText = '⚠️ Соединение потеряно. Возможно, сессия Colab истекла. Перезапустите ноутбук.';
+    };
+  }
+
+  function startRecording() {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      alert('Ваш браузер не поддерживает распознавание речи. Используйте Chrome, Edge или Safari.');
+      return;
+    }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.lang = 'ru-RU'; // автоматически определит и английский
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      isRecording = true;
+      recordBtn.disabled = true;
+      stopBtn.disabled = false;
+      statusSpan.innerText = '🎤 Слушаю... говорите.';
+      recordBtn.classList.add('recording');
+    };
+    recognition.onresult = (event) => {
+      const text = event.results[0][0].transcript;
+      addMessage(text, true);
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ text: text }));
+        statusSpan.innerText = '🤔 Думаю над ответом...';
+      } else {
+        statusSpan.innerText = '❌ Нет соединения с сервером. Перезагрузите страницу.';
+      }
+      stopRecording();
+    };
+    recognition.onerror = (event) => {
+      statusSpan.innerText = 'Ошибка распознавания: ' + event.error;
+      stopRecording();
+    };
+    recognition.onend = () => stopRecording();
+    recognition.start();
+  }
+
+  function stopRecording() {
+    if (recognition) {
+      recognition.stop();
+    }
+    isRecording = false;
+    recordBtn.disabled = false;
+    stopBtn.disabled = true;
+    recordBtn.classList.remove('recording');
+    if (statusSpan.innerText.includes('Слушаю')) {
+      statusSpan.innerText = '⏸️ Запись остановлена.';
+    }
+  }
+
+  recordBtn.onclick = startRecording;
+  stopBtn.onclick = stopRecording;
+
+  connectWebSocket();
+</script>
+</body>
+</html>
