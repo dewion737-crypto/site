@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Интерактивный диалог с собеседником онлайн бесплатно</title>
+<meta name="description" content="учим английский интерактивно, режим беседы, любые темы">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1db954;
+    --green-dark: #17a045;
+    --green-light: #e8f8ed;
+    --bg: #f0f2f5;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #555;
+    --border: #e0e4ea;
+    --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  .site-header { background: #fff; border-bottom: 1px solid var(--border); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 8px rgba(0,0,0,0.05); flex-wrap: wrap; gap: 12px; }
+  .site-logo { font-size: 1.1rem; font-weight: 800; color: var(--green); text-decoration: none; }
+  .site-nav { display: flex; gap: 28px; flex-wrap: wrap; }
+  .site-nav a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .site-nav a:hover { color: var(--green); }
+
+  .hero { background: linear-gradient(135deg, #0b3b5f 0%, #1a4a6f 100%); padding: 56px 20px 48px; text-align: center; color: white; }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.2); color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.2; max-width: 700px; margin: 0 auto 16px; }
+  .hero h1 span { color: var(--green); }
+  .hero p { max-width: 550px; margin: 0 auto; opacity: 0.9; font-size: 1rem; }
+
+  .page-wrap { max-width: 750px; margin: 0 auto; padding: 40px 20px 80px; }
+  .card { background: var(--card); border-radius: 24px; box-shadow: var(--shadow); padding: 28px; margin-bottom: 24px; }
+
+  /* Чат */
+  .chat { background: rgba(0,0,0,0.03); border-radius: 20px; height: 380px; overflow-y: auto; padding: 16px; margin: 20px 0; display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--border); }
+  .message { display: flex; gap: 10px; align-items: flex-start; max-width: 85%; }
+  .message.user { align-self: flex-end; flex-direction: row-reverse; }
+  .message.ai { align-self: flex-start; }
+  .avatar { width: 36px; height: 36px; background: #e9eef3; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .user .avatar { background: var(--green); color: white; }
+  .bubble { background: #e9eef3; padding: 12px 18px; border-radius: 20px; font-size: 15px; line-height: 1.4; word-wrap: break-word; color: #1e2a3a; }
+  .user .bubble { background: var(--green); color: white; }
+  .bubble em { background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 12px; font-style: normal; font-weight: 600; }
+  .typing span { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #888; margin: 0 2px; animation: typing 1.4s infinite ease-in-out both; }
+  .typing span:nth-child(1) { animation-delay: -0.32s; }
+  .typing span:nth-child(2) { animation-delay: -0.16s; }
+  @keyframes typing { 0%,80%,100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+  /* Поле ввода */
+  .input-area { display: flex; gap: 12px; margin-top: 16px; align-items: flex-end; }
+  textarea { flex: 1; border: 1px solid var(--border); border-radius: 24px; padding: 12px 18px; font-family: inherit; font-size: 15px; resize: none; max-height: 120px; }
+  textarea:focus { outline: none; border-color: var(--green); }
+  button { background: var(--green); color: white; border: none; border-radius: 40px; padding: 12px 24px; font-weight: 600; cursor: pointer; transition: transform 0.1s, opacity 0.2s; }
+  button:active { transform: scale(0.97); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-record { background: #e74c3c; margin-right: auto; }
+  .btn-record.recording { background: #c0392b; animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+  .status { text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted); }
+
+  /* Список изученных слов */
+  .words-panel { background: var(--green-light); border-radius: 16px; padding: 16px; margin-top: 20px; }
+  .words-panel h3 { font-size: 0.9rem; margin-bottom: 10px; color: var(--green-dark); display: flex; align-items: center; gap: 8px; }
+  .words-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-chip { background: white; border-radius: 20px; padding: 4px 12px; font-size: 13px; font-weight: 500; color: var(--green-dark); border: 1px solid var(--green); }
+  .new-word-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2c3e50; color: white; padding: 10px 20px; border-radius: 40px; font-size: 14px; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2); animation: fadeOut 3s forwards; pointer-events: none; }
+  @keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+
+  .tip-block { background: var(--green-light); border-radius: 16px; padding: 20px; margin-top: 24px; }
+  .tip-block h3 { font-size: 1rem; margin-bottom: 10px; color: var(--green-dark); }
+  .article-footer { border-top: 1px solid var(--border); padding-top: 20px; margin-top: 20px; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+  .article-footer a { color: var(--green); text-decoration: none; }
+  @media (max-width: 600px) {
+    .site-nav { display: none; }
+    .card { padding: 20px; }
+    .chat { height: 300px; }
+    .message { max-width: 95%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="https://english-lessons.online" class="site-logo">Online English lessons</a>
+  <nav class="site-nav">
+    <a href="https://english-lessons.online">Главная</a>
+    <a href="https://english-lessons.online/#about-course">О курсе</a>
+    <a href="https://english-lessons.online/#teacher">Преподаватель</a>
+    <a href="https://english-lessons.online/#program">Программа</a>
+    <a href="https://english-lessons.online/#faq">FAQ</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">🎓 Репетитор английского</div>
+  <h1>Разговор <span>по душам</span></h1>
+  <p>Учим английский в живом диалоге. Новые слова — сразу в дело.</p>
+</div>
+
+<div class="page-wrap">
+  <div class="card">
+    <h2 style="margin-bottom: 8px;">🗣️ Поговорите с ИИ‑репетитором</h2>
+    <p style="font-size:0.9rem; margin-bottom: 16px;">Пишите или говорите — бот ответит, вставит новые английские слова и проверит, как вы их усвоили.</p>
+
+    <div class="chat" id="chat">
+      <div class="message ai">
+        <div class="avatar">🎓</div>
+        <div class="bubble">Привет! Я ваш репетитор английского. Давайте начнём с простого. Скажите или напишите что-нибудь о себе.</div>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <button id="recordBtn" class="btn-record">🎙️ Голос</button>
+      <textarea id="input" rows="1" placeholder="Напишите сообщение..."></textarea>
+      <button id="sendBtn" disabled>➤ Отправить</button>
+    </div>
+    <div class="status" id="status">✅ Готов. Начните разговор.</div>
+
+    <div class="words-panel">
+      <h3>📖 Выученные слова</h3>
+      <div class="words-list" id="wordsList">(пока нет)</div>
+    </div>
+
+    <div class="tip-block">
+      <h3>💡 Как это работает?</h3>
+      <p>Бот говорит на русском, но учит английским словам. Каждое новое слово появляется в "кавычках". После 2–3 слов — задаёт вопрос на английском. Отвечайте, и он мягко поправит.</p>
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <p>© 2025 English-lessons.online — уроки английского с Ксенией, CELTA Cambridge</p>
+    <p><a href="https://english-lessons.online">Вернуться на главную</a></p>
+  </div>
+</div>
+
+<script>
+  // ⚠️ КЛЮЧ GROQ (НЕ ВЫКЛАДЫВАЙТЕ В ПУБЛИЧНЫЙ ДОСТУП)
+  const GROQ_API_KEY = "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";
+  const MODEL = "llama-3.3-70b-versatile";
+
+  const SYSTEM_PROMPT = `Ты — дружелюбный репетитор разговорного английского языка. Твоя задача:
+
+1. ОБЩЕНИЕ: Веди живой, естественный разговор на РУССКОМ языке — как друг, который помогает учить английский.
+
+2. ОБУЧЕНИЕ СЛОВАМ:
+   - В каждом своём сообщении вставляй 1-2 новых английских слова/фразы, объясняя их по-русски
+   - Формат: «Кстати, "to arrive" — это "приехать/прибыть". Например: "I arrived at the airport."»
+   - Постепенно накапливай словарь пройденных слов
+
+3. ЗАКРЕПЛЕНИЕ:
+   - После того как дал 2-3 новых слова — задай простой вопрос на английском, чтобы собеседник использовал эти слова
+   - Пример: «А теперь скажи по-английски: где ты сейчас находишься?»
+   - Если ответил правильно — похвали и продолжи тему
+   - Если ошибся — мягко поправь и объясни
+
+4. ТЕМЫ: Двигайся по бытовым темам: знакомство → аэропорт → гостиница → кафе → магазин → транспорт → etc.
+   Переходи к следующей теме когда закрепил 3-5 слов предыдущей.
+
+5. СТИЛЬ:
+   - Никакой терапии, никакого «дыши глубже»
+   - Живо, с юмором, с интересом к собеседнику
+   - Короткие сообщения — 3-5 предложений максимум
+   - Всегда заканчивай либо вопросом, либо мини-заданием
+
+6. ПАМЯТЬ: Используй историю диалога чтобы не повторять уже пройденные слова и помнить что уже изучено.`;
+
+  let history = [];
+  let learnedWords = [];
+
+  // DOM элементы
+  const chatDiv = document.getElementById('chat');
+  const inputField = document.getElementById('input');
+  const sendBtn = document.getElementById('sendBtn');
+  const recordBtn = document.getElementById('recordBtn');
+  const statusSpan = document.getElementById('status');
+  const wordsListDiv = document.getElementById('wordsList');
+
+  // ---------- Функции UI ----------
+  function addMessage(role, text) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `message ${role}`;
+    const avatar = document.createElement('div');
+    avatar.className = 'avatar';
+    avatar.textContent = role === 'user' ? '🙋' : '🎓';
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.innerHTML = text.replace(/"([a-zA-Z][^"]+)"/g, '<em>"$1"</em>');
+    msgDiv.appendChild(avatar);
+    msgDiv.appendChild(bubble);
+    chatDiv.appendChild(msgDiv);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+  }
+
+  function showTyping() {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'message ai';
+    typingDiv.id = 'typing-indicator';
+    const avatar = document.createElement('div');
+    avatar.className = 'avatar';
+    avatar.textContent = '🎓';
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble typing';
+    bubble.innerHTML = '<span></span><span></span><span></span>';
+    typingDiv.appendChild(avatar);
+    typingDiv.appendChild(bubble);
+    chatDiv.appendChild(typingDiv);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+  }
+
+  function hideTyping() {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+  }
+
+  function extractEnglishWords(text) {
+    const matches = text.match(/"([a-zA-Z][a-zA-Z\s]{1,30})"/g) || [];
+    return matches.map(m => m.replace(/"/g, '')).filter(w => w.split(' ').length <= 4);
+  }
+
+  function updateWordsPanel() {
+    if (learnedWords.length === 0) {
+      wordsListDiv.innerHTML = '(пока нет)';
+      return;
+    }
+    wordsListDiv.innerHTML = learnedWords.map(word => `<span class="word-chip">${word}</span>`).join('');
+  }
+
+  function showToast(msg) {
+    const toast = document.createElement('div');
+    toast.className = 'new-word-toast';
+    toast.textContent = '📚 ' + msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+
+  function addNewWordsFromResponse(text) {
+    const newWords = extractEnglishWords(text);
+    let added = false;
+    for (let w of newWords) {
+      if (!learnedWords.includes(w)) {
+        learnedWords.push(w);
+        showToast(w);
+        added = true;
+      }
+    }
+    if (added) updateWordsPanel();
+  }
+
+  // ---------- Запрос к Groq ----------
+  async function callGroq(userText) {
+    const messages = [{ role: 'system', content: SYSTEM_PROMPT }];
+    if (learnedWords.length > 0) {
+      messages[0].content += `\n\n[Уже изучено: ${learnedWords.slice(-10).join(', ')}]`;
+    }
+    for (const [u, a] of history.slice(-6)) {
+      messages.push({ role: 'user', content: u });
+      messages.push({ role: 'assistant', content: a });
+    }
+    messages.push({ role: 'user', content: userText });
+
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${GROQ_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: messages,
+        max_tokens: 400,
+        temperature: 0.8
+      })
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`Groq API error ${response.status}: ${errText}`);
+    }
+    const data = await response.json();
+    return data.choices[0].message.content.trim();
+  }
+
+  // ---------- Отправка сообщения ----------
+  async function sendMessage(text) {
+    const userText = text.trim();
+    if (!userText) return;
+
+    inputField.value = '';
+    inputField.style.height = 'auto';
+    sendBtn.disabled = true;
+    recordBtn.disabled = true;
+
+    addMessage('user', userText);
+    showTyping();
+    statusSpan.innerText = '🤔 Репетитор думает...';
+
+    try {
+      const aiResponse = await callGroq(userText);
+      hideTyping();
+      addMessage('ai', aiResponse);
+      statusSpan.innerText = '✅ Ответ получен. Продолжайте.';
+      history.push([userText, aiResponse]);
+      if (history.length > 20) history.shift();
+      addNewWordsFromResponse(aiResponse);
+    } catch (err) {
+      hideTyping();
+      addMessage('ai', '⚠️ Ошибка соединения с Groq. Проверьте интернет или ключ API.');
+      statusSpan.innerText = '❌ Ошибка: ' + err.message;
+      console.error(err);
+    } finally {
+      sendBtn.disabled = false;
+      recordBtn.disabled = false;
+      inputField.focus();
+    }
+  }
+
+  // ---------- Голосовое распознавание (один экземпляр) ----------
+  let recognition = null;
+  let isRecording = false;
+
+  function initSpeechRecognition() {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      statusSpan.innerText = '❌ Ваш браузер не поддерживает распознавание речи.';
+      recordBtn.disabled = true;
+      return null;
+    }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const rec = new SpeechRecognition();
+    rec.lang = 'ru-RU';
+    rec.interimResults = false;
+    rec.maxAlternatives = 1;
+
+    rec.onstart = () => {
+      isRecording = true;
+      recordBtn.classList.add('recording');
+      recordBtn.textContent = '🎙️ Слушаю...';
+      statusSpan.innerText = '🎤 Говорите...';
+    };
+
+    rec.onresult = (event) => {
+      const voiceText = event.results[0][0].transcript;
+      statusSpan.innerText = `✏️ Распознано: "${voiceText}"`;
+      sendMessage(voiceText);
+    };
+
+    rec.onerror = (event) => {
+      statusSpan.innerText = 'Ошибка распознавания: ' + event.error;
+      stopVoiceInput();
+    };
+
+    rec.onend = () => {
+      if (isRecording) stopVoiceInput();
+    };
+
+    return rec;
+  }
+
+  function startVoiceInput() {
+    if (!recognition) {
+      recognition = initSpeechRecognition();
+    }
+    if (!recognition || isRecording) return;
+    try {
+      recognition.start();
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+
+  function stopVoiceInput() {
+    if (recognition && isRecording) {
+      try {
+        recognition.stop();
+      } catch (e) {}
+    }
+    isRecording = false;
+    recordBtn.classList.remove('recording');
+    recordBtn.textContent = '🎙️ Голос';
+    if (!statusSpan.innerText.includes('Ошибка') && !statusSpan.innerText.includes('Распознано')) {
+      statusSpan.innerText = '✅ Готов. Начните разговор.';
+    }
+  }
+
+  // При клике на кнопку голоса
+  recordBtn.onclick = () => {
+    if (isRecording) {
+      stopVoiceInput();
+    } else {
+      if (!recognition) {
+        recognition = initSpeechRecognition();
+      }
+      startVoiceInput();
+    }
+  };
+
+  // ---------- Текстовое поле ----------
+  inputField.addEventListener('input', () => {
+    inputField.style.height = 'auto';
+    inputField.style.height = Math.min(inputField.scrollHeight, 120) + 'px';
+    sendBtn.disabled = !inputField.value.trim();
+  });
+
+  inputField.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (!sendBtn.disabled) sendMessage(inputField.value);
+    }
+  });
+
+  sendBtn.onclick = () => sendMessage(inputField.value);
+
+  // ---------- Инициализация при загрузке ----------
+  window.onload = async () => {
+    // Создаём объект распознавания, но не запускаем (разрешение запросится при первом клике)
+    recognition = initSpeechRecognition();
+    sendBtn.disabled = true;
+    recordBtn.disabled = false;
+    showTyping();
+    try {
+      const greeting = await callGroq('Привет! Я хочу учить английский язык в разговорном режиме.');
+      hideTyping();
+      addMessage('ai', greeting);
+      addNewWordsFromResponse(greeting);
+      history.push(['Привет! Я хочу учить английский язык в разговорном режиме.', greeting]);
+      statusSpan.innerText = '✅ Репетитор готов. Говорите или пишите.';
+    } catch(e) {
+      hideTyping();
+      addMessage('ai', '⚠️ Не удалось подключиться к Groq. Проверьте ключ API и интернет.');
+      statusSpan.innerText = '❌ Ошибка подключения.';
+    } finally {
+      sendBtn.disabled = false;
+      inputField.focus();
+    }
+  };
+</script>
+</body>
+</html>
