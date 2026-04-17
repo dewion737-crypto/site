@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Самые нужные слова английского языка с произношением</title>
+<meta name="description" content="Базовые местоимения, глаголы, существительные, прилагательные и предлоги. Учите главное на слух">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1db954;
+    --green-dark: #17a045;
+    --green-light: #e8f8ed;
+    --bg: #f0f2f5;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #555;
+    --border: #e0e4ea;
+    --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.5; }
+
+  /* Шапка как в примере */
+  .site-header { background: #fff; border-bottom: 1px solid var(--border); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
+  .site-logo { font-size: 1.1rem; font-weight: 800; color: var(--green); text-decoration: none; }
+  .site-nav { display: flex; gap: 28px; }
+  .site-nav a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .site-nav a:hover { color: var(--green); }
+
+  /* Hero блок */
+  .hero { background: #fff; padding: 56px 20px 48px; text-align: center; border-bottom: 1px solid var(--border); }
+  .hero-tag { display: inline-block; background: var(--green-light); color: var(--green-dark); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.2; max-width: 740px; margin: 0 auto 16px; letter-spacing: -0.02em; }
+  .hero h1 span { color: var(--green); }
+  .hero-meta { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px; }
+  .hero-intro { max-width: 580px; margin: 0 auto; color: var(--text-muted); font-size: 1rem; }
+
+  .page-wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+  .card { background: var(--card); border-radius: 16px; box-shadow: var(--shadow); padding: 24px; margin-bottom: 24px; }
+
+  /* Панель выбора голоса */
+  .voice-panel {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .voice-panel label {
+    font-weight: 600;
+    color: #1e4663;
+  }
+  #voiceSelect {
+    padding: 8px 12px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+  }
+
+  /* Аккордеон — зелёные заголовки, плюс/минус */
+  .accordion-item {
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .accordion-header {
+    background: var(--green);
+    color: white;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+  }
+  .accordion-header:hover {
+    background: var(--green-dark);
+  }
+  .indicator {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  .accordion-content.open {
+    max-height: 600px;
+    overflow-y: auto;
+    transition: max-height 0.4s ease-in;
+  }
+
+  /* Таблица компактная */
+  .vocab-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .vocab-table th {
+    background: #eef2f7;
+    color: #1e4663;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd;
+  }
+  .vocab-table td {
+    padding: 7px 12px;
+    border-bottom: 1px solid #e9ecef;
+  }
+  .vocab-table tbody tr {
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .vocab-table tbody tr:hover {
+    background-color: var(--green-light);
+  }
+  .transcription {
+    color: #5a6e7c;
+    font-family: monospace;
+    font-size: 0.8rem;
+  }
+  .translation {
+    color: #2c5a2e;
+  }
+
+  @media (max-width: 600px) {
+    .site-nav { display: none; }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="https://english-lessons.online" class="site-logo">Online English lessons</a>
+  <nav class="site-nav">
+    <a href="https://english-lessons.online/#about-course">О курсе</a>
+    <a href="https://english-lessons.online/#teacher">Преподаватель</a>
+    <a href="https://english-lessons.online/#program">Программа</a>
+    <a href="https://english-lessons.online/#faq">FAQ</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">🎧 Аудиословарь</div>
+  <h1>Самые нужные слова <span>английского языка</span></h1>
+  <div class="hero-meta">Это «фундамент» языка. Частотные словари (Oxford 3000, COCA) подтверждают: именно эти слова и связки используются в каждом бытовом диалоге</div>
+  <p class="hero-intro">Базовые местоимения, глаголы, существительные, прилагательные и предлоги. Учите на слух.</p>
+</div>
+
+<div class="page-wrap">
+  <div class="card">
+    <div class="voice-panel">
+      <label>🎙 Голос:</label>
+      <select id="voiceSelect"></select>
+      <span style="font-size:0.85rem;">▼ Кликните по строке со словом</span>
+    </div>
+    <div id="accordion-root"></div>
+  </div>
+</div>
+
+<script>
+  // ---------- ДАННЫЕ СЛОВ (те же самые) ----------
+  const categories = [
+    { title: "📌 Местоимения и Вопросы", words: [ ["I","aɪ","я"],["you","juː","ты/вы"],["he","hiː","он"],["she","ʃiː","она"],["it","ɪt","оно"],["we","wiː","мы"],["they","ðeɪ","они"],["me","miː","меня/мне"],["him","hɪm","его/ему"],["her","hɜːr","её"],["us","ʌs","нас/нам"],["them","ðem","их/им"],["my","maɪ","мой"],["your","jɔːr","твой/ваш"],["his","hɪz","его"],["our","ˈaʊər","наш"],["their","ðer","их"],["who","huː","кто"],["what","wɒt","что"],["where","wer","где"],["when","wen","когда"],["why","waɪ","почему"],["how","haʊ","как"],["this","ðɪs","этот"],["that","ðæt","тот"],["these","ðiːz","эти"],["those","ðəʊz","те"] ] },
+    { title: "⚡ Глаголы (Действия)", words: [ ["be","biː","быть"],["have","hæv","иметь"],["do","duː","делать"],["say","seɪ","сказать"],["go","ɡəʊ","идти"],["get","ɡet","получать"],["make","meɪk","делать"],["know","nəʊ","знать"],["think","θɪŋk","думать"],["take","teɪk","брать"],["see","siː","видеть"],["come","kʌm","приходить"],["want","wɒnt","хотеть"],["look","lʊk","смотреть"],["use","juːz","использовать"],["find","faɪnd","находить"],["give","ɡɪv","давать"],["tell","tel","рассказывать"],["work","wɜːrk","работать"],["call","kɔːl","звонить"],["try","traɪ","пытаться"],["ask","æsk","спрашивать"],["need","niːd","нуждаться"],["feel","fiːl","чувствовать"],["become","bɪˈkʌm","становиться"],["leave","liːv","покидать"],["put","pʊt","класть"],["mean","miːn","означать"],["keep","kiːp","хранить"],["let","let","позволять"],["begin","bɪˈɡɪn","начинать"],["seem","siːm","казаться"],["help","help","помогать"],["talk","tɔːk","разговаривать"],["turn","tɜːrn","поворачивать"],["start","stɑːrt","начинать"],["show","ʃəʊ","показывать"],["hear","hɪər","слышать"],["play","pleɪ","играть"],["run","rʌn","бежать"],["move","muːv","двигаться"],["live","lɪv","жить"],["believe","bɪˈliːv","верить"],["bring","brɪŋ","приносить"],["write","raɪt","писать"],["sit","sɪt","сидеть"],["stand","stænd","стоять"],["lose","luːz","терять"],["pay","peɪ","платить"],["meet","miːt","встречать"],["include","ɪnˈkluːd","включать"],["continue","kənˈtɪnjuː","продолжать"],["set","set","устанавливать"],["learn","lɜːrn","учить"],["change","tʃeɪndʒ","менять"],["lead","liːd","вести"],["understand","ˌʌndərˈstænd","понимать"],["watch","wɒtʃ","смотреть"],["follow","ˈfɒləʊ","следовать"],["stop","stɒp","останавливать"],["create","kriˈeɪt","создавать"],["speak","spiːk","говорить"],["read","riːd","читать"],["allow","əˈlaʊ","разрешать"],["add","æd","добавлять"],["spend","spend","тратить"],["grow","ɡrəʊ","расти"],["open","ˈəʊpən","открывать"],["walk","wɔːk","гулять"],["win","wɪn","побеждать"],["offer","ˈɒfər","предлагать"],["remember","rɪˈmembər","помнить"],["love","lʌv","любить"],["buy","baɪ","покупать"],["wait","weɪt","ждать"],["serve","sɜːrv","служить"],["send","send","отправлять"],["build","bɪld","строить"],["stay","steɪ","оставаться"],["fall","fɔːl","падать"],["cut","kʌt","резать"],["reach","riːtʃ","достигать"],["kill","kɪl","убивать"],["raise","reɪz","поднимать"],["pass","pæs","проходить"],["sell","sel","продавать"],["decide","dɪˈsaɪd","решать"],["return","rɪˈtɜːrn","возвращаться"],["hope","həʊp","надеяться"],["explain","ɪkˈspleɪn","объяснять"] ] },
+    { title: "🏷️ Существительные", words: [ ["time","taɪm","время"],["year","jɪər","год"],["people","ˈpiːpl","люди"],["way","weɪ","путь"],["day","deɪ","день"],["man","mæn","мужчина"],["thing","θɪŋ","вещь"],["woman","ˈwʊmən","женщина"],["life","laɪf","жизнь"],["child","tʃaɪld","ребёнок"],["world","wɜːrld","мир"],["school","skuːl","школа"],["family","ˈfæməli","семья"],["country","ˈkʌntri","страна"],["problem","ˈprɒbləm","проблема"],["place","pleɪs","место"],["week","wiːk","неделя"],["company","ˈkʌmpəni","компания"],["question","ˈkwestʃən","вопрос"],["money","ˈmʌni","деньги"],["story","ˈstɔːri","история"],["book","bʊk","книга"],["job","dʒɒb","работа"],["word","wɜːrd","слово"],["friend","frend","друг"],["car","kɑːr","машина"],["city","ˈsɪti","город"],["name","neɪm","имя"],["idea","aɪˈdɪə","идея"],["food","fuːd","еда"],["teacher","ˈtiːtʃər","учитель"] ] },
+    { title: "🎨 Прилагательные", words: [ ["good","ɡʊd","хороший"],["new","njuː","новый"],["first","fɜːrst","первый"],["last","lɑːst","последний"],["long","lɒŋ","длинный"],["great","ɡreɪt","великий"],["little","ˈlɪtl","маленький"],["own","əʊn","собственный"],["other","ˈʌðər","другой"],["old","əʊld","старый"],["big","bɪɡ","большой"],["high","haɪ","высокий"],["different","ˈdɪfrənt","разный"],["small","smɔːl","маленький"],["large","lɑːrdʒ","крупный"],["next","nekst","следующий"],["early","ˈɜːrli","ранний"],["young","jʌŋ","молодой"],["important","ɪmˈpɔːrtnt","важный"],["few","fjuː","мало"],["public","ˈpʌblɪk","общественный"],["bad","bæd","плохой"],["same","seɪm","одинаковый"],["able","ˈeɪbl","способный"] ] },
+    { title: "🔗 Союзы и Предлоги", words: [ ["and","ænd","и"],["but","bʌt","но"],["or","ɔːr","или"],["for","fɔːr","для"],["with","wɪð","с"],["on","ɒn","на"],["at","æt","в"],["by","baɪ","у"],["from","frɒm","из"],["up","ʌp","вверх"],["about","əˈbaʊt","о"],["into","ˈɪntə","внутрь"],["over","ˈəʊvər","над"],["after","ˈæftər","после"],["under","ˈʌndər","под"],["out","aʊt","из"],["through","θruː","через"],["between","bɪˈtwiːn","между"],["during","ˈdjʊərɪŋ","во время"],["because","bɪˈkəz","потому что"],["very","ˈveri","очень"],["just","dʒʌst","просто"],["also","ˈɔːlsəʊ","также"],["even","ˈiːvn","даже"],["only","ˈəʊnli","только"],["many","ˈmeni","много"],["some","sʌm","несколько"],["such","sʌtʃ","такой"],["then","ðen","затем"],["so","səʊ","так"] ] }
+  ];
+
+  // Построение аккордеона
+  function buildAccordion() {
+    const container = document.getElementById('accordion-root');
+    if (!container) return;
+    container.innerHTML = '';
+
+    categories.forEach(cat => {
+      const item = document.createElement('div');
+      item.className = 'accordion-item';
+
+      const header = document.createElement('div');
+      header.className = 'accordion-header';
+      header.innerHTML = `<span>${cat.title}</span><span class="indicator">➕</span>`;
+
+      const content = document.createElement('div');
+      content.className = 'accordion-content';
+
+      const table = document.createElement('table');
+      table.className = 'vocab-table';
+      table.innerHTML = `<thead><tr><th>Слово</th><th>Транскрипция</th><th>Перевод</th></tr></thead><tbody></tbody>`;
+      const tbody = table.querySelector('tbody');
+
+      cat.words.forEach(w => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-word', w[0]);
+        row.innerHTML = `
+          <td>${w[0]}</td>
+          <td class="transcription">${w[1]}</td>
+          <td class="translation">${w[2] || '—'}</td>
+        `;
+        tbody.appendChild(row);
+      });
+      content.appendChild(table);
+      item.appendChild(header);
+      item.appendChild(content);
+      container.appendChild(item);
+    });
+
+    // Аккордеон: плюс/минус, открывается только один
+    const items = document.querySelectorAll('.accordion-item');
+    function closeAll() {
+      items.forEach(item => {
+        const cont = item.querySelector('.accordion-content');
+        const ind = item.querySelector('.indicator');
+        if (cont) cont.classList.remove('open');
+        if (ind) ind.textContent = '➕';
+      });
+    }
+    items.forEach(item => {
+      const header = item.querySelector('.accordion-header');
+      const content = item.querySelector('.accordion-content');
+      const indicator = item.querySelector('.indicator');
+      header.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = content.classList.contains('open');
+        closeAll();
+        if (!isOpen) {
+          content.classList.add('open');
+          if (indicator) indicator.textContent = '➖';
+        }
+      });
+    });
+    // Открыть первый
+    const firstContent = document.querySelector('.accordion-content');
+    const firstIndicator = document.querySelector('.indicator');
+    if (firstContent) {
+      firstContent.classList.add('open');
+      if (firstIndicator) firstIndicator.textContent = '➖';
+    }
+
+    attachRowClickListeners();
+  }
+
+  function attachRowClickListeners() {
+    const rows = document.querySelectorAll('.vocab-table tbody tr');
+    rows.forEach(row => {
+      row.removeEventListener('click', rowClickHandler);
+      row.addEventListener('click', rowClickHandler);
+    });
+  }
+
+  function rowClickHandler(e) {
+    e.stopPropagation();
+    const word = this.getAttribute('data-word');
+    if (!word) return;
+    if (window.speechSynthesis.speaking || window.speechSynthesis.paused) {
+      window.speechSynthesis.cancel();
+    }
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'en-US';
+    const selectedVoice = voiceSelect.value;
+    if (selectedVoice) {
+      const voices = window.speechSynthesis.getVoices();
+      const voice = voices.find(v => v.name === selectedVoice);
+      if (voice) utterance.voice = voice;
+    }
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  // Голоса
+  const voiceSelect = document.getElementById('voiceSelect');
+  function loadVoices() {
+    const voices = window.speechSynthesis.getVoices();
+    voiceSelect.innerHTML = '';
+    const englishVoices = voices.filter(v => v.lang.startsWith('en'));
+    const voicesToShow = englishVoices.length ? englishVoices : voices;
+    voicesToShow.forEach(voice => {
+      const option = document.createElement('option');
+      option.value = voice.name;
+      option.textContent = `${voice.name} (${voice.lang})`;
+      voiceSelect.appendChild(option);
+    });
+    const defaultOpt = Array.from(voiceSelect.options).find(opt =>
+      opt.textContent.includes('Google UK') || opt.textContent.includes('Samantha') || opt.textContent.includes('Microsoft')
+    );
+    if (defaultOpt) defaultOpt.selected = true;
+  }
+
+  window.addEventListener('load', () => {
+    buildAccordion();
+    loadVoices();
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  });
+</script>
+</body>
+</html>
